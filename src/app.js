@@ -1,5 +1,5 @@
 import 'materialize-css';
-import './scss/styles.scss';
-import main from './js/views/main.js';
+import './styles/styles.scss';
+import main from './scripts/views/main.js';
 
 document.addEventListener('DOMContentLoaded', main);

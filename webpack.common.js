@@ -20,6 +20,12 @@ module.exports = {
 				test: /\.html$/i,
 				loader: 'html-loader',
 			},
+			// To String Loader
+			{
+				test: /\.(sa|sc|c)ss$/,
+				exclude: '/styles/',
+				use: ['to-string-loader', 'css-loader', 'sass-loader'],
+			},
 			// SCSS / SASS / CSS Loader
 			{
 				test: /\.(sa|sc|c)ss$/,
@@ -86,7 +92,7 @@ module.exports = {
 			filename: 'index.html',
 		}),
 		new webpack.ProvidePlugin({
-			'materialize-css': 'materialize-css/dist/css/materialize.min.css',
+			materialize: 'materialize-css/dist/css/materialize.min.css',
 		}),
 	],
 };

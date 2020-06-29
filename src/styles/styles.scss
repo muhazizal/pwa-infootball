@@ -1,9 +1,9 @@
 @import 'test';
 
-$heading: #aaa;
+$heading: pink;
 
 body {
-	background-color: $color;
+	background-color: $heading;
 
 	h1 {
 		color: $heading;
