@@ -1,5 +1,6 @@
 // Init
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -83,7 +84,9 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			filename: 'index.html',
-			favicon: './src/images/favicon.png',
+		}),
+		new webpack.ProvidePlugin({
+			'materialize-css': 'materialize-css/dist/css/materialize.min.css',
 		}),
 	],
 };

@@ -1,0 +1,11 @@
+@import 'test';
+
+$heading: #aaa;
+
+body {
+	background-color: $color;
+
+	h1 {
+		color: $heading;
+	}
+}
