@@ -9,7 +9,7 @@ import './js/components/navbar.js';
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker
-			.register('./service-worker.js')
+			.register('/service-worker.js')
 			.then(function () {
 				console.log('Pendaftaran ServiceWorker berhasil');
 			})

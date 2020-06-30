@@ -1,13 +1,15 @@
 // Init
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 // Export
 module.exports = merge(common, {
 	mode: 'production',
 	module: {
 		rules: [
+			// Chain eslint and babel loader
 			{
 				test: /\.js$/,
 				exclude: '/node_modules/',
@@ -33,14 +35,42 @@ module.exports = merge(common, {
 		],
 	},
 	optimization: {
+		moduleIds: 'hashed',
+		runtimeChunk: 'single',
+		splitChunks: {
+			chunks: 'async',
+			minSize: 30000,
+			maxSize: 0,
+			minChunks: 1,
+			maxAsyncRequests: 6,
+			maxInitialRequests: 4,
+			automaticNameDelimiter: '~',
+			cacheGroups: {
+				defaultVendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10,
+				},
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true,
+				},
+			},
+		},
+		minimize: true,
 		minimizer: [
-			new UglifyJsPlugin({
-				test: /\.js($|\?)/i,
+			// Minify js plugin
+			new TerserPlugin({
+				test: /\.js(\?.*)?$/i,
+				include: '/src/app.js',
 				exclude: '/node_modules/',
 				cache: true,
 				parallel: true,
 				sourceMap: true,
+				extractComments: true,
 			}),
+			// Minify css plugin
+			new OptimizeCSSAssetsPlugin({}),
 		],
 	},
 });
