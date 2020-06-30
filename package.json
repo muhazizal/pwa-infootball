@@ -17,9 +17,7 @@
 		"url": "https://github.com/muhazizal/pwa-football/issues"
 	},
 	"homepage": "https://github.com/muhazizal/pwa-football#readme",
-	"dependencies": {
-		"materialize-css": "^1.0.0-rc.2"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@babel/core": "^7.10.3",
 		"@babel/preset-env": "^7.10.3",
