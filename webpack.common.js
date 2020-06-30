@@ -16,7 +16,7 @@ module.exports = {
 		rules: [
 			// HTML Loader
 			{
-				test: /\.html$/i,
+				test: /\.html$/,
 				loader: 'html-loader',
 				options: {
 					minimize: true,
