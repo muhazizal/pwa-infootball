@@ -1,5 +1,5 @@
-// Using Service Worker PLugin
-const DEBUG = false;
+// used for debugging
+const DEBUG = true;
 
 // When the user navigates to your site,
 // the browser tries to redownload the script file that defined the service
@@ -8,8 +8,9 @@ const DEBUG = false;
 // to what it currently has, it considers it 'new'.
 const { assets } = global.serviceWorkerOption;
 
-const CACHE_NAME = new Date().toISOString();
+const CACHE_NAME = 'pwa-remobs';
 
+// Init assets to cache
 let assetsToCache = [...assets, './'];
 
 assetsToCache = assetsToCache.map(path => {
@@ -78,6 +79,7 @@ self.addEventListener('message', event => {
 	}
 });
 
+// Fetch assets for working offline
 self.addEventListener('fetch', event => {
 	const request = event.request;
 
