@@ -4,11 +4,8 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-
-// Url public path
-const PUBLIC_PATH = 'http://localhost:8080/';
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 // Exports
 module.exports = {
@@ -16,7 +13,6 @@ module.exports = {
 	output: {
 		filename: isDevelopment ? 'bundle.js' : 'bundle.[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
-		publicPath: PUBLIC_PATH,
 	},
 	devtool: 'inline-source-map',
 	module: {
@@ -107,38 +103,48 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			filename: 'index.html',
-			favicon: './src/assets/icons/infootball-512.png',
-			scriptLoading: 'defer',
-			hash: true,
-		}),
-		// Service worker precache plugin
-		new SWPrecacheWebpackPlugin({
-			cacheId: 'pwa-infootball',
-			filename: 'service-worker.js',
-			dontCacheBustUrlsMatching: /\.\w{8}\./,
-			minify: true,
-			navigateFallback: PUBLIC_PATH + 'index.html',
-			mergeStaticsConfig: true,
-			staticFileGlobsIgnorePatterns: [/\.map$/],
+			favicon: './src/assets/icons/favicon.png',
 		}),
 		// Pwa manifest plugin
 		new WebpackPwaManifest({
 			name: 'PWA Infootball',
 			short_name: 'Infootball',
+			orientation: 'portrait',
+			display: 'standalone',
 			description: 'PWA about football information',
 			background_color: '#f1f1f1',
 			theme_color: '#f1f1f1',
 			'theme-color': '#f1f1f1',
-			ios: true,
-			crossorigin: 'use-credentials',
+			ios: {
+				'apple-mobile-web-app-title': 'Infootball',
+				'apple-mobile-web-app-status-bar-style': 'black',
+				'apple-mobile-web-app-capable': 'yes',
+			},
+			crossorigin: 'anonymous',
 			start_url: '/index.html',
 			icons: [
 				{
-					src: path.resolve('./src/assets/icons/infootball-512.png'),
+					src: path.resolve('./src/assets/icons/favicon.png'),
 					sizes: [96, 128, 192, 256, 384, 512],
-					destination: path.join('assets', 'icons'),
+					destination: path.join('assets', 'android'),
+				},
+				{
+					src: path.resolve('./src/assets/icons/favicon.png'),
+					sizes: [120, 152, 167, 180, 1024],
+					destination: path.join('assets', 'ios'),
+					ios: true,
+				},
+				{
+					src: path.resolve('./src/assets/icons/favicon.png'),
+					sizes: 1024,
+					destination: path.join('assets', 'ios'),
+					ios: 'startup',
 				},
 			],
+		}),
+		// Service worker webpack plugin
+		new ServiceWorkerWebpackPlugin({
+			entry: path.join(__dirname, './src/sw.js'),
 		}),
 	],
 };

@@ -36,7 +36,6 @@ module.exports = merge(common, {
 	},
 	optimization: {
 		moduleIds: 'hashed',
-		runtimeChunk: 'single',
 		splitChunks: {
 			chunks: 'async',
 			minSize: 30000,
