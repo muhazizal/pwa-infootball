@@ -1,4 +1,4 @@
-import runtime from '../../../node_modules/serviceworker-webpack-plugin/lib/runtime';
+import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 // Register service worker
 if ('serviceWorker' in navigator) {

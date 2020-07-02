@@ -14,7 +14,6 @@ module.exports = {
 		filename: isDevelopment ? 'bundle.js' : 'bundle.[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 	},
-	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			// HTML loader
@@ -57,10 +56,10 @@ module.exports = {
 			},
 			// File images loader
 			{
-				test: /\.(png|jpe?g|gif|svg)$/i,
+				test: /\.(png|jpe?g|gif|svg|jp2)$/i,
 				loader: 'file-loader',
 				options: {
-					name: isDevelopment ? '[path][name].[ext]' : '[contenthash].[ext]',
+					name: isDevelopment ? '[path][name].[ext]' : '[name].[contenthash].[ext]',
 					outputPath: path.join('assets', 'images'),
 				},
 			},
@@ -79,7 +78,7 @@ module.exports = {
 			},
 			// Url loader
 			{
-				test: /\.(png|jpg|gif)$/i,
+				test: /\.(png|jpe?g|gif)$/i,
 				use: [
 					{
 						loader: 'url-loader',

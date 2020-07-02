@@ -1,7 +1,9 @@
 // Import materialize scss and js
-import './js/materialize.min';
 import './sass/materialize.scss';
+import './js/materialize.min.js';
 
-// Import controllers
-import './js/controllers/reg-sw.js';
-import './js/controllers/navbar.js';
+// Import service-worker registration
+import './js/reg-sw.js';
+
+// Import components
+import './js/components/navbar.js';

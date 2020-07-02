@@ -1,5 +1,4 @@
-// used for debugging
-const DEBUG = true;
+const DEBUG = false;
 
 // When the user navigates to your site,
 // the browser tries to redownload the script file that defined the service
@@ -8,7 +7,7 @@ const DEBUG = true;
 // to what it currently has, it considers it 'new'.
 const { assets } = global.serviceWorkerOption;
 
-const CACHE_NAME = 'pwa-remobs';
+const CACHE_NAME = new Date().toISOString();
 
 // Init assets to cache
 let assetsToCache = [...assets, './'];

@@ -1,0 +1,19 @@
+nav {
+	background-color: $light-background-1;
+
+	.sidenav {
+		background-color: $light-background-1;
+	}
+
+	.brand-logo,
+	.sidenav-trigger {
+		color: $dark-heading;
+		font-weight: 600;
+	}
+
+	li {
+		a {
+			color: $dark-text;
+		}
+	}
+}

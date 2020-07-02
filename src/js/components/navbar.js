@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	// Activate sidenav
 	const el = document.querySelectorAll('.sidenav');
 	M.Sidenav.init(el);
@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (this.status === 200) {
 					content.innerHTML = xhttp.responseText;
+
+					// Activate carousel on homepage
+					if (page === 'home') {
+						const el = document.querySelectorAll('.carousel');
+						M.Carousel.init(el, {
+							numVisible: 3,
+						});
+					}
 				} else if (this.status === 404) {
 					content.innerHTML = '<p>Halaman tidak ditemukan.</p>';
 				} else {
@@ -47,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						const sidenav = document.querySelector('.sidenav');
 						M.Sidenav.getInstance(sidenav).close();
 
-						// Muat konten halaman yang dipanggil
+						// Load selected navigation
 						page = event.target.getAttribute('href').substr(1);
 						loadPage(page);
 					});
