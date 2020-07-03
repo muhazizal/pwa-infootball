@@ -1,3 +1,5 @@
+import { getChampions, getGermany, getNetherland, getEnglish, getSpain, getFrance } from '../data/competitions.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 	// Activate sidenav
 	const el = document.querySelectorAll('.sidenav');
@@ -13,12 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (this.status === 200) {
 					content.innerHTML = xhttp.responseText;
 
-					// Activate carousel on homepage
 					if (page === 'home') {
+						// Activate carousel on homepage
 						const el = document.querySelectorAll('.carousel');
 						M.Carousel.init(el, {
 							numVisible: 3,
 						});
+
+						getChampions();
+						getGermany();
+						getNetherland();
+						getEnglish();
+						getSpain();
+						getFrance();
 					}
 				} else if (this.status === 404) {
 					content.innerHTML = '<p>Halaman tidak ditemukan.</p>';

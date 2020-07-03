@@ -1,6 +1,6 @@
 // Init
-const path = require('path');
 const isDevelopment = process.env.NODE_ENV === 'development';
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -54,13 +54,14 @@ module.exports = {
 					},
 				],
 			},
-			// File images loader
+			// Images loader with file-loader
 			{
-				test: /\.(png|jpe?g|gif|svg|jp2)$/i,
+				test: /\.(png|jpe?g|gif|svg|jp2|webp)$/i,
 				loader: 'file-loader',
 				options: {
 					name: isDevelopment ? '[path][name].[ext]' : '[name].[contenthash].[ext]',
 					outputPath: path.join('assets', 'images'),
+					limit: 10000,
 				},
 			},
 			// Fonts loader
@@ -72,18 +73,6 @@ module.exports = {
 						options: {
 							name: isDevelopment ? '[path][name].[ext]' : '[contenthash].[ext]',
 							outputPath: path.join('assets', 'fonts'),
-						},
-					},
-				],
-			},
-			// Url loader
-			{
-				test: /\.(png|jpe?g|gif)$/i,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 8192,
 						},
 					},
 				],

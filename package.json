@@ -5,7 +5,7 @@
 	"main": "app.js",
 	"scripts": {
 		"build": "webpack --config webpack.prod.js",
-		"serve": "webpack-dev-server --config webpack.dev.js --inline --open"
+		"serve": "webpack-dev-server --config webpack.dev.js --open"
 	},
 	"repository": {
 		"type": "git",
@@ -26,10 +26,12 @@
 		"css-loader": "^3.6.0",
 		"eslint": "^7.3.1",
 		"eslint-loader": "^4.0.2",
+		"exports-loader": "^1.1.0",
 		"fibers": "^5.0.0",
 		"file-loader": "^6.0.0",
 		"html-loader": "^1.1.0",
 		"html-webpack-plugin": "^4.3.0",
+		"imports-loader": "^1.1.0",
 		"mini-css-extract-plugin": "^0.9.0",
 		"node-sass": "^4.14.1",
 		"optimize-css-assets-webpack-plugin": "^5.0.3",

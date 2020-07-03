@@ -5,5 +5,8 @@ import './js/materialize.min.js';
 // Import service-worker registration
 import './js/reg-sw.js';
 
+// Import data
+import './js/data/competitions.js';
+
 // Import components
 import './js/components/navbar.js';

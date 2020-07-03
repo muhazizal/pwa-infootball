@@ -1,27 +1,23 @@
 .home {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-
 	&__header {
 		font-size: 28px;
 		font-weight: 500;
 		margin-bottom: 0;
-		color: $dark-heading;
+		color: $dark-text-1;
 	}
 
 	&__subheader-1 {
-		font-size: 14px;
-		color: $dark-text;
+		font-size: 16px;
+		color: $dark-text-2;
+		margin-bottom: 0;
 	}
+}
 
-	&__subheader-2 {
-		font-size: 20px;
-		color: $dark-text;
-		margin: 36px auto 0 auto;
-	}
+.card {
+	margin: 0;
 
-	.carousel {
-		height: 350px;
+	p {
+		color: $dark-heading;
+		font-weight: 600;
 	}
 }
