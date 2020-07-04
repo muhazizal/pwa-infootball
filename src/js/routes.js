@@ -1,13 +1,12 @@
 // Import competition
-import { getCompetition } from '../data/competitions.js';
+import { getCompetition, getCompetitionStanding } from './data/api.js';
 
 // League images
-import championsImg from '../../assets/images/champions.svg';
-import bundesligaImg from '../../assets/images/bundesliga.svg';
-import eredivisieImg from '../../assets/images/eredivisie.svg';
-import laligaImg from '../../assets/images/laliga.svg';
-import ligue1Img from '../../assets/images/ligue1.svg';
-import premierImg from '../../assets/images/premier.svg';
+import bundesligaImg from '../assets/images/bundesliga.svg';
+import eredivisieImg from '../assets/images/eredivisie.svg';
+import laligaImg from '../assets/images/laliga.svg';
+import ligue1Img from '../assets/images/ligue1.svg';
+import premierImg from '../assets/images/premier.svg';
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Activate sidenav
@@ -24,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (this.status === 200) {
 					content.innerHTML = xhttp.responseText;
 
+					// homepage
 					if (page === 'home') {
 						// Activate carousel on homepage
 						const el = document.querySelectorAll('.carousel');
@@ -32,12 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
 						});
 
 						// Load competition carousel
-						getCompetition('2001', 'champions', championsImg);
 						getCompetition('2002', 'germany', bundesligaImg);
 						getCompetition('2003', 'netherland', eredivisieImg);
-						getCompetition('2021', 'english', laligaImg);
-						getCompetition('2014', 'spain', ligue1Img);
-						getCompetition('2015', 'france', premierImg);
+						getCompetition('2014', 'spain', laligaImg);
+						getCompetition('2015', 'france', ligue1Img);
+						getCompetition('2021', 'english', premierImg);
+					}
+
+					// competition standing
+					if (page === 'standing') {
+						// Load competition standing
+						getCompetitionStanding();
+
+						// set base url on logo
+						const url = window.location.origin + '/';
+						const back = document.querySelector('.back');
+						const brandLogo = document.querySelector('.brand-logo');
+						back.setAttribute('href', url);
+						brandLogo.setAttribute('href', url);
 					}
 				} else if (this.status === 404) {
 					content.innerHTML = '<p>Halaman tidak ditemukan.</p>';
@@ -50,8 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhttp.send();
 	};
 
-	let page = window.location.hash.substr(1);
-	if (page === '') page = 'home';
+	console.log(window.location);
+	const path = window.location.pathname;
+	let page = '';
+
+	if (path === '/') {
+		page = 'home';
+	} else if (path === '/competition.html') {
+		page = 'standing';
+	} else {
+		console.log('no path');
+	}
+
 	loadPage(page);
 	// End load page
 
@@ -81,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				});
 			}
 		};
-		xhttp.open('GET', '/src/html/components/navbar.html', true);
+		xhttp.open('GET', '/src/html/navbar.html', true);
 		xhttp.send();
 	};
 	loadNav();

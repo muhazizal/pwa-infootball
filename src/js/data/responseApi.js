@@ -18,11 +18,12 @@ export const error = error => {
 	console.log('Error: ' + error);
 };
 
-// Render html response
-export const render = (data, elementId, img) => {
+// Render html competition
+export const renderCompetition = (data, elementId, img) => {
+	const url = window.location.origin;
 	let elementHtml = '';
 	elementHtml += `
-	<a href="/src/html/pages/competition.html?id=${data.id}">
+	<a class="competition" href="${url}/competition.html?id=${data.id}">
 		<div class="card">
 			<div class="card-image waves-effect waves-block waves-light">
 				<img src="${img}">

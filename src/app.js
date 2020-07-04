@@ -6,7 +6,7 @@ import './js/materialize.min.js';
 import './js/reg-sw.js';
 
 // Import data
-import './js/data/competitions.js';
+import './js/data/api.js';
 
-// Import components
-import './js/components/navbar.js';
+// Import navbar
+import './js/routes.js';
