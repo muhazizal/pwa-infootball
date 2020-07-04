@@ -90,8 +90,15 @@ module.exports = {
 		// HTML plugin
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
-			filename: 'index.html',
+			filename: 'index.[contenthash].html',
 			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+		}),
+		new HtmlWebpackPlugin({
+			template: './src/html/pages/competition.html',
+			filename: 'index.[contenthash].html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
 		}),
 		// Pwa manifest plugin
 		new WebpackPwaManifest({

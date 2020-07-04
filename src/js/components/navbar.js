@@ -1,4 +1,13 @@
-import { getChampions, getGermany, getNetherland, getEnglish, getSpain, getFrance } from '../data/competitions.js';
+// Import competition
+import { getCompetition } from '../data/competitions.js';
+
+// League images
+import championsImg from '../../assets/images/champions.svg';
+import bundesligaImg from '../../assets/images/bundesliga.svg';
+import eredivisieImg from '../../assets/images/eredivisie.svg';
+import laligaImg from '../../assets/images/laliga.svg';
+import ligue1Img from '../../assets/images/ligue1.svg';
+import premierImg from '../../assets/images/premier.svg';
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Activate sidenav
@@ -22,12 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
 							numVisible: 3,
 						});
 
-						getChampions();
-						getGermany();
-						getNetherland();
-						getEnglish();
-						getSpain();
-						getFrance();
+						// Load competition carousel
+						getCompetition('2001', 'champions', championsImg);
+						getCompetition('2002', 'germany', bundesligaImg);
+						getCompetition('2003', 'netherland', eredivisieImg);
+						getCompetition('2021', 'english', laligaImg);
+						getCompetition('2014', 'spain', ligue1Img);
+						getCompetition('2015', 'france', premierImg);
 					}
 				} else if (this.status === 404) {
 					content.innerHTML = '<p>Halaman tidak ditemukan.</p>';
