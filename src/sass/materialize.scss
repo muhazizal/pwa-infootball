@@ -42,8 +42,11 @@
 
 //-----------------------------------------------------------------
 
-// My style guide set up
+// My variable
 @import 'my-variable';
+
+// My mixins
+@import 'my-mixins';
 
 // Pages
 @import 'pages/home';

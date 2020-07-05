@@ -54,18 +54,6 @@ module.exports = {
 					},
 				],
 			},
-			// Url loader
-			{
-				test: /\.(png|jpe?g|gif|svg|woff|woff2|eot|ttf|otf)$/i,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 8192,
-						},
-					},
-				],
-			},
 			// File loader for images
 			{
 				test: /\.(png|jpe?g|gif|svg|jp2|webp)$/i,
@@ -85,6 +73,12 @@ module.exports = {
 						options: {
 							name: isDevelopment ? '[path][name].[ext]' : '[contenthash].[ext]',
 							outputPath: path.join('assets', 'fonts'),
+						},
+					},
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 8192,
 						},
 					},
 				],
@@ -152,6 +146,7 @@ module.exports = {
 		// Service worker webpack plugin
 		new ServiceWorkerWebpackPlugin({
 			entry: path.join(__dirname, './src/sw.js'),
+			includes: ['**/*', 'https://fonts.googleapis.com/icon?family=Material+Icons'],
 		}),
 	],
 };

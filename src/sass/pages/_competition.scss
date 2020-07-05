@@ -1,18 +1,29 @@
 .competition {
 	color: $dark-heading;
 
-	i,
-	.tab a {
-		color: $dark-heading;
-		display: inline;
+	.brand-logo {
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	.tabs {
 		background-color: $light-background-1;
 	}
 
-	.brand-logo {
-		left: 50%;
-		transform: translateX(-50%);
+	.tab a {
+		color: black;
+
+		&:hover {
+			color: $light-heading;
+		}
+
+		@include minWidth(992px) {
+			margin: 0 50px 0 0;
+		}
 	}
+}
+
+nav i.material-icons {
+	color: $dark-heading;
+	display: inline;
 }
