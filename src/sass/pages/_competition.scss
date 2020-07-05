@@ -1,0 +1,18 @@
+.competition {
+	color: $dark-heading;
+
+	i,
+	.tab a {
+		color: $dark-heading;
+		display: inline;
+	}
+
+	.tabs {
+		background-color: $light-background-1;
+	}
+
+	.brand-logo {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}

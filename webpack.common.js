@@ -54,7 +54,19 @@ module.exports = {
 					},
 				],
 			},
-			// Images loader with file-loader
+			// Url loader
+			{
+				test: /\.(png|jpe?g|gif|svg|woff|woff2|eot|ttf|otf)$/i,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 8192,
+						},
+					},
+				],
+			},
+			// File loader for images
 			{
 				test: /\.(png|jpe?g|gif|svg|jp2|webp)$/i,
 				loader: 'file-loader',
