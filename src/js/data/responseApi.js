@@ -22,6 +22,7 @@ export const error = error => {
 export const renderCompetition = (data, elementId, img) => {
 	const url = window.location.origin;
 	let elementHtml = '';
+
 	elementHtml += `
 	<a class="competition" href="${url}/competition.html?id=${data.id}">
 		<div class="card">
@@ -44,6 +45,7 @@ export const renderCompetitionMatches = data => {
 	data.matches.forEach(match => {
 		let matchDate = match.utcDate.substr(0, 10) + ' | ' + match.utcDate.substr(11, 18);
 
+		// If match array 0
 		if (matchLength === 0) {
 			console.log('kosong');
 			elementHtml = `
@@ -51,7 +53,10 @@ export const renderCompetitionMatches = data => {
 				<h5>No upcoming matches.</h5>
 			</div>
 			`;
-		} else if (matchLength === 1) {
+		}
+
+		// If match array 1
+		else if (matchLength === 1) {
 			elementHtml += `
 			<li class="collection-item col s12">
 				<div class="center-align block">
@@ -63,7 +68,10 @@ export const renderCompetitionMatches = data => {
 				</div>
 			</li>
 			`;
-		} else {
+		}
+
+		// If match array > 1
+		else {
 			elementHtml += `
 			<li class="collection-item col s12 m6 l4">
 				<div class="center-align block">
@@ -76,6 +84,7 @@ export const renderCompetitionMatches = data => {
 			</li>
 			`;
 		}
+
 		document.querySelector('.collection').innerHTML = elementHtml;
 	});
 };

@@ -18,3 +18,8 @@ nav {
 		}
 	}
 }
+
+.sidenav li > a:hover,
+nav ul a:hover {
+	background-color: rgba($color: $light-heading, $alpha: 0.1);
+}
