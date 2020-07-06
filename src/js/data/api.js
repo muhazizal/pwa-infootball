@@ -1,8 +1,12 @@
 // Api response
-import { status, json, error, renderCompetition } from './responseApi.js';
+import { status, json, error, renderCompetition, renderCompetitionMatches } from './responseApi.js';
 
-// BASE URL
+// Base url
 const BASE_URL = 'https://api.football-data.org/';
+
+// Competition url
+const COMPETTION_URL = new URLSearchParams(window.location.search);
+const COMPETITION_ID = COMPETTION_URL.get('id');
 
 // Fetch request
 const fetchRequest = {
@@ -22,19 +26,35 @@ export const getCompetition = (id, elementId, competitionImg) => {
 		.catch(error);
 };
 
+// Get competition matches
+export const getCompetitionMatches = () => {
+	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`, fetchRequest)
+		.then(status)
+		.then(json)
+		.then(data => {
+			console.log(data);
+			renderCompetitionMatches(data);
+		})
+		.catch(error);
+};
+
 // Get competition standing
 export const getCompetitionStanding = () => {
-	const url = new URLSearchParams(window.location.search);
-	const id = url.get('id');
-
-	fetch(`${BASE_URL}v2/competitions/${id}/standings`, fetchRequest)
+	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`, fetchRequest)
 		.then(status)
 		.then(json)
 		.then(data => {
 			console.log(data);
 		})
-		.catch(() => {
-			error();
-			console.log('test');
-		});
+		.catch(error);
+};
+
+export const getCompetitionTeams = () => {
+	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`, fetchRequest)
+		.then(status)
+		.then(json)
+		.then(data => {
+			console.log(data);
+		})
+		.catch(message => error(message));
 };

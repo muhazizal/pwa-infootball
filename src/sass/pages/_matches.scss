@@ -1,0 +1,22 @@
+.collection {
+	margin: 30px auto;
+	font-size: 14px;
+	font-weight: 500;
+
+	&-item {
+		background-color: $light-background-1 !important;
+
+		#matchDate {
+			color: darkgrey;
+		}
+
+		a {
+			background-color: $dark-heading;
+			margin: 15px auto;
+
+			&:hover {
+				background-color: $dark-heading-hover;
+			}
+		}
+	}
+}

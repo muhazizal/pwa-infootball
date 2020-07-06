@@ -1,5 +1,5 @@
 // Import competition
-import { getCompetition, getCompetitionStanding } from './data/api.js';
+import { getCompetition, getCompetitionMatches, getCompetitionStanding, getCompetitionTeams } from './data/api.js';
 
 // League images
 import bundesligaImg from '../assets/images/bundesliga.svg';
@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (this.status === 200) {
 					content.innerHTML = xhttp.responseText;
 
-					// homepage
 					if (page === 'home') {
 						// Activate carousel on homepage
 						const el = document.querySelectorAll('.carousel');
@@ -37,19 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
 						getCompetition('2014', 'spain', laligaImg);
 						getCompetition('2015', 'france', ligue1Img);
 						getCompetition('2021', 'english', premierImg);
-					}
-
-					// competition standing
-					if (page === 'standing') {
+					} else if (page === 'matches') {
+						// Load competition matches
+						getCompetitionMatches();
+					} else if (page === 'standing') {
 						// Load competition standing
 						getCompetitionStanding();
-
-						// set base url on logo
-						const url = window.location.origin + '/';
-						const back = document.querySelector('.back');
-						const brandLogo = document.querySelector('.brand-logo');
-						back.setAttribute('href', url);
-						brandLogo.setAttribute('href', url);
+					} else if (page === 'teams') {
+						getCompetitionTeams();
+					} else {
+						console.log('no pages');
 					}
 				} else if (this.status === 404) {
 					content.innerHTML = '<p>Halaman tidak ditemukan.</p>';
@@ -62,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhttp.send();
 	};
 
-	console.log(window.location);
+	// Check pathname for routing
 	const path = window.location.pathname;
 	let page = '';
 
 	if (path === '/') {
 		page = 'home';
 	} else if (path === '/competition.html') {
-		page = 'standing';
+		page = 'matches';
 	} else {
 		console.log('no path');
 	}
@@ -83,6 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhttp.onreadystatechange = function () {
 			if (this.readyState === 4) {
 				if (this.status !== 200) return;
+
+				// Set link back icon and url logo
+				const url = window.location.origin + '/';
+				const back = document.querySelector('.back');
+				const brandLogo = document.querySelector('.brand-logo');
+				back.setAttribute('href', url);
+				brandLogo.setAttribute('href', url);
 
 				// Load list menu
 				document.querySelectorAll('.topnav, .sidenav').forEach(el => {

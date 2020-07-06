@@ -36,3 +36,22 @@ export const renderCompetition = (data, elementId, img) => {
 	`;
 	document.getElementById(`${elementId}`).innerHTML = elementHtml;
 };
+
+export const renderCompetitionMatches = data => {
+	let elementHtml = '';
+	data.matches.forEach(match => {
+		let matchDate = match.utcDate.substr(0, 10) + ' - ' + match.utcDate.substr(11, 18);
+		elementHtml += `
+		<li class="collection-item col s12 m6 l4">
+			<div class="center-align block">
+				<p>${match.awayTeam.name}</p>
+				<p>VS</p>
+				<p>${match.homeTeam.name}</p>
+				<p id="matchDate">${matchDate}</p>
+				<a class="waves-effect waves-light btn">Save Match</a>
+			</div>
+		</li>
+		`;
+		document.querySelector('.collection').innerHTML = elementHtml;
+	});
+};
