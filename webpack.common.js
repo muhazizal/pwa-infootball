@@ -9,9 +9,12 @@ const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 // Exports
 module.exports = {
-	entry: './src/app.js',
+	entry: {
+		main: './src/app.js',
+		vendors: ['webpack-material-design-icons'],
+	},
 	output: {
-		filename: isDevelopment ? 'bundle.js' : 'bundle.[contenthash].js',
+		filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 	},
 	module: {
@@ -56,7 +59,7 @@ module.exports = {
 			},
 			// File loader for images
 			{
-				test: /\.(png|jpe?g|gif|svg|jp2|webp)$/i,
+				test: /\.(png|jpe?g|gif|svg)$/i,
 				loader: 'file-loader',
 				options: {
 					name: isDevelopment ? '[path][name].[ext]' : '[name].[contenthash].[ext]',
@@ -64,21 +67,14 @@ module.exports = {
 					limit: 10000,
 				},
 			},
-			// Fonts loader
+			// File loader for fonts
 			{
-				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				test: /\.(eot|woff|ttf|woff2|otf)$/,
 				use: [
 					{
 						loader: 'file-loader',
 						options: {
-							name: isDevelopment ? '[path][name].[ext]' : '[contenthash].[ext]',
-							outputPath: path.join('assets', 'fonts'),
-						},
-					},
-					{
-						loader: 'url-loader',
-						options: {
-							limit: 8192,
+							name: isDevelopment ? '[path][name].[ext]' : '[name].[ext]',
 						},
 					},
 				],
@@ -90,7 +86,7 @@ module.exports = {
 		new CleanWebpackPlugin({}),
 		// Extract css plugin
 		new MiniCssExtractPlugin({
-			filename: isDevelopment ? 'bundle.css' : 'bundle.[hash].css',
+			filename: isDevelopment ? '[name].css' : '[name].[hash].css',
 			chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
 		}),
 		// HTML plugin
@@ -146,7 +142,6 @@ module.exports = {
 		// Service worker webpack plugin
 		new ServiceWorkerWebpackPlugin({
 			entry: path.join(__dirname, './src/sw.js'),
-			includes: ['**/*', 'https://fonts.googleapis.com/icon?family=Material+Icons'],
 		}),
 	],
 };
