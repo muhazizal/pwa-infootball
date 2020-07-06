@@ -39,19 +39,43 @@ export const renderCompetition = (data, elementId, img) => {
 
 export const renderCompetitionMatches = data => {
 	let elementHtml = '';
+	const matchLength = data.matches.length;
+
 	data.matches.forEach(match => {
-		let matchDate = match.utcDate.substr(0, 10) + ' - ' + match.utcDate.substr(11, 18);
-		elementHtml += `
-		<li class="collection-item col s12 m6 l4">
-			<div class="center-align block">
-				<p>${match.awayTeam.name}</p>
-				<p>VS</p>
-				<p>${match.homeTeam.name}</p>
-				<p id="matchDate">${matchDate}</p>
-				<a class="waves-effect waves-light btn">Save Match</a>
+		let matchDate = match.utcDate.substr(0, 10) + ' | ' + match.utcDate.substr(11, 18);
+
+		if (matchLength === 0) {
+			console.log('kosong');
+			elementHtml = `
+			<div class="collection-item center-align">
+				<h5>No upcoming matches.</h5>
 			</div>
-		</li>
-		`;
+			`;
+		} else if (matchLength === 1) {
+			elementHtml += `
+			<li class="collection-item col s12">
+				<div class="center-align block">
+					<p>${match.awayTeam.name}</p>
+					<p>VS</p>
+					<p>${match.homeTeam.name}</p>
+					<p id="matchDate">${matchDate}</p>
+					<a class="waves-effect waves-light btn">Save Match</a>
+				</div>
+			</li>
+			`;
+		} else {
+			elementHtml += `
+			<li class="collection-item col s12 m6 l4">
+				<div class="center-align block">
+					<p>${match.awayTeam.name}</p>
+					<p>VS</p>
+					<p>${match.homeTeam.name}</p>
+					<p id="matchDate">${matchDate}</p>
+					<a class="waves-effect waves-light btn">Save Match</a>
+				</div>
+			</li>
+			`;
+		}
 		document.querySelector('.collection').innerHTML = elementHtml;
 	});
 };

@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
 						getCompetition('2015', 'france', ligue1Img);
 						getCompetition('2021', 'english', premierImg);
 					} else if (page === 'matches') {
+						// Set link back icon and url logo
+						const url = window.location.origin + '/';
+						const back = document.querySelector('.back');
+						const brandLogo = document.querySelector('.brand-logo');
+						back.setAttribute('href', url);
+						brandLogo.setAttribute('href', url);
+
 						// Load competition matches
 						getCompetitionMatches();
 					} else if (page === 'standing') {
@@ -58,19 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhttp.send();
 	};
 
-	// Check pathname for routing
-	const path = window.location.pathname;
-	let page = '';
-
-	if (path === '/') {
-		page = 'home';
-	} else if (path === '/competition.html') {
-		page = 'matches';
-	} else {
-		console.log('no path');
-	}
-
-	loadPage(page);
 	// End load page
 
 	// Load navigation
@@ -79,13 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhttp.onreadystatechange = function () {
 			if (this.readyState === 4) {
 				if (this.status !== 200) return;
-
-				// Set link back icon and url logo
-				const url = window.location.origin + '/';
-				const back = document.querySelector('.back');
-				const brandLogo = document.querySelector('.brand-logo');
-				back.setAttribute('href', url);
-				brandLogo.setAttribute('href', url);
 
 				// Load list menu
 				document.querySelectorAll('.topnav, .sidenav').forEach(el => {
@@ -109,6 +96,45 @@ document.addEventListener('DOMContentLoaded', () => {
 		xhttp.open('GET', '/src/html/navbar.html', true);
 		xhttp.send();
 	};
-	loadNav();
+
 	// End load navigation
+
+	// Load tabs
+	const loadTabs = () => {
+		const xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function () {
+			if (this.readyState === 4) {
+				if (this.status !== 200) return;
+
+				document.querySelector('.tabs').innerHTML = xhttp.responseText;
+
+				document.querySelectorAll('.tabs .tab').forEach(el => {
+					el.addEventListener('click', event => {
+						page = event.target.getAttribute('href').substr(1);
+						loadPage(page);
+					});
+				});
+			}
+		};
+		xhttp.open('GET', '/src/html/tabs.html', true);
+		xhttp.send();
+	};
+
+	// End load tabs
+
+	// Check pathname for routing
+	const path = window.location.pathname;
+	let page = '';
+
+	if (path === '/') {
+		page = 'home';
+		loadPage(page);
+		loadNav();
+	} else if (path === '/competition.html') {
+		page = 'matches';
+		loadPage(page);
+		loadTabs();
+	} else {
+		console.log('no path');
+	}
 });
