@@ -25,11 +25,21 @@ const fetchRequest = {
 
 // Get one particular competition
 export const getCompetition = (id, elementId, competitionImg) => {
+	// get data from cache before request api
+	if ('caches' in window) {
+		caches.match(`${BASE_URL}v2/competitions/${id}`).then(response => {
+			if (response) {
+				response.json().then(data => {
+					renderCompetition(data, elementId, competitionImg);
+				});
+			}
+		});
+	}
+
 	fetch(`${BASE_URL}v2/competitions/${id}`, fetchRequest)
 		.then(status)
 		.then(json)
 		.then(data => {
-			console.log(data);
 			renderCompetition(data, elementId, competitionImg);
 		})
 		.catch(error);
@@ -41,7 +51,6 @@ export const getCompetitionMatches = () => {
 		.then(status)
 		.then(json)
 		.then(data => {
-			console.log(data);
 			renderCompetitionMatches(data);
 		})
 		.catch(error);
@@ -53,7 +62,6 @@ export const getCompetitionStanding = () => {
 		.then(status)
 		.then(json)
 		.then(data => {
-			console.log(data);
 			renderCompetitionStanding(data);
 		})
 		.catch(error);
@@ -64,7 +72,6 @@ export const getCompetitionTeams = () => {
 		.then(status)
 		.then(json)
 		.then(data => {
-			console.log(data);
 			renderCompetitionTeams(data);
 		})
 		.catch(message => error(message));

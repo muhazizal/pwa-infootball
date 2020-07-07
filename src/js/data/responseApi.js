@@ -43,7 +43,7 @@ export const renderCompetition = (data, elementId, img) => {
 export const renderCompetitionMatches = data => {
 	let elementHtml = '';
 	const matchLength = data.matches.length;
-	const competitionName = ` <li class="collection-header center-align"><h5>${data.competition.name}</h5></li>`;
+	const competitionName = `<li class="collection-header center-align"><h5>${data.competition.name}</h5></li>`;
 
 	data.matches.forEach(match => {
 		let matchDate = match.utcDate.substr(0, 10) + ' | ' + match.utcDate.substr(11, 18);

@@ -6,30 +6,30 @@
 		font-size: 22px;
 		font-weight: 500;
 	}
-}
 
-.card {
-	margin: 30px auto;
-	height: 350px;
+	.card {
+		margin: 30px auto;
+		height: 350px;
 
-	&-image {
-		img {
-			max-width: 200px;
-			max-height: 200px;
-			margin: 0 auto;
+		&-image {
+			img {
+				max-width: 200px;
+				max-height: 200px;
+				margin: 0 auto;
+			}
+
+			i {
+				background-color: white;
+				color: black;
+			}
 		}
 
-		i {
-			background-color: white;
-			color: black;
-		}
-	}
+		p {
+			color: $dark-background-1;
 
-	p {
-		color: $dark-background-1;
-
-		span {
-			color: darkgrey;
+			span {
+				color: darkgrey;
+			}
 		}
 	}
 }
