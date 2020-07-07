@@ -1,0 +1,14 @@
+.table {
+	margin: 30px auto;
+
+	#competition-name &__header {
+		text-align: center;
+		background-color: $dark-heading;
+		color: white;
+		font-size: 18px;
+	}
+
+	&__header {
+		background-color: $light-background-1;
+	}
+}

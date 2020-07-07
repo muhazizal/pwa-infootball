@@ -1,5 +1,12 @@
 // Api response
-import { status, json, error, renderCompetition, renderCompetitionMatches } from './responseApi.js';
+import {
+	status,
+	json,
+	error,
+	renderCompetition,
+	renderCompetitionMatches,
+	renderCompetitionStanding,
+} from './responseApi.js';
 
 // Base url
 const BASE_URL = 'https://api.football-data.org/';
@@ -45,6 +52,7 @@ export const getCompetitionStanding = () => {
 		.then(json)
 		.then(data => {
 			console.log(data);
+			renderCompetitionStanding(data);
 		})
 		.catch(error);
 };

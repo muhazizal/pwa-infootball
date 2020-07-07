@@ -3,9 +3,11 @@
 	font-size: 14px;
 	font-weight: 500;
 
-	&-item {
+	&-header {
 		background-color: $light-background-1 !important;
+	}
 
+	&-item {
 		#matchDate {
 			color: darkgrey;
 		}

@@ -18,7 +18,7 @@ export const error = error => {
 	console.log('Error: ' + error);
 };
 
-// Render html competition
+// Render competition
 export const renderCompetition = (data, elementId, img) => {
 	const url = window.location.origin;
 	let elementHtml = '';
@@ -35,12 +35,15 @@ export const renderCompetition = (data, elementId, img) => {
 		</div>
 	</a>
 	`;
+
 	document.getElementById(`${elementId}`).innerHTML = elementHtml;
 };
 
+// Render competition matches
 export const renderCompetitionMatches = data => {
 	let elementHtml = '';
 	const matchLength = data.matches.length;
+	const competitionName = ` <li class="collection-header center-align"><h5>${data.competition.name}</h5></li>`;
 
 	data.matches.forEach(match => {
 		let matchDate = match.utcDate.substr(0, 10) + ' | ' + match.utcDate.substr(11, 18);
@@ -85,6 +88,27 @@ export const renderCompetitionMatches = data => {
 			`;
 		}
 
-		document.querySelector('.collection').innerHTML = elementHtml;
+		document.querySelector('.collection').innerHTML = competitionName + elementHtml;
+	});
+};
+
+// Render competition standing
+export const renderCompetitionStanding = data => {
+	let elementHtml = '';
+	const competitionName = `<th class="table__header" colspan="5">${data.competition.name}</th>`;
+
+	data.standings[0].table.forEach(standing => {
+		elementHtml += `
+		<tr class="table__row">
+			<td class="table__data">${standing.position}</td>
+			<td class="table__data">${standing.team.name}</td>
+			<td class="table__data">${standing.playedGames}</td>
+			<td class="table__data">${standing.goalDifference}</td>
+			<td class="table__data">${standing.points}</td>
+		</tr>
+		`;
+
+		document.querySelector('#competition-name').innerHTML = competitionName;
+		document.querySelector('.table__body').innerHTML = elementHtml;
 	});
 };
