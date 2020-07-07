@@ -2,9 +2,9 @@
 import { getCompetition, getCompetitionMatches, getCompetitionStanding, getCompetitionTeams } from './data/api.js';
 
 // Import league images
-import championsImg from '../assets/images/champions.svg';
-import laligaImg from '../assets/images/laliga.svg';
 import premierImg from '../assets/images/premier.svg';
+import laligaImg from '../assets/images/laliga.svg';
+import serieAImg from '../assets/images/serieA.svg';
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Activate sidenav
@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
 						});
 
 						// Load competition carousel
-						getCompetition('2001', 'champions', championsImg);
-						getCompetition('2014', 'spain', laligaImg);
 						getCompetition('2021', 'english', premierImg);
+						getCompetition('2014', 'spain', laligaImg);
+						getCompetition('2019', 'serieA', serieAImg);
 					}
 
 					// if page is matches

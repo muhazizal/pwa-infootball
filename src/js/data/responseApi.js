@@ -67,7 +67,6 @@ export const renderCompetitionMatches = data => {
 					<p>VS</p>
 					<p>${match.homeTeam.name}</p>
 					<p id="matchDate">${matchDate}</p>
-					<a class="waves-effect waves-light btn">Save Match</a>
 				</div>
 			</li>
 			`;
@@ -82,7 +81,6 @@ export const renderCompetitionMatches = data => {
 					<p>VS</p>
 					<p>${match.homeTeam.name}</p>
 					<p id="matchDate">${matchDate}</p>
-					<a class="waves-effect waves-light btn">Save Match</a>
 				</div>
 			</li>
 			`;
@@ -95,20 +93,39 @@ export const renderCompetitionMatches = data => {
 // Render competition standing
 export const renderCompetitionStanding = data => {
 	let elementHtml = '';
-	const competitionName = `<th class="table__header" colspan="5">${data.competition.name}</th>`;
+	const competitionName = `<th class="table__header" colspan="10">${data.competition.name}</th>`;
+	const competitionHeader = `
+	<th class="table__header">#</th>
+	<th class="table__header">Team</th>
+	<th class="table__header">PG</th>
+	<th class="table__header hide-on-small-only">W</th>
+	<th class="table__header hide-on-small-only">D</th>
+	<th class="table__header hide-on-small-only">L</th>
+	<th class="table__header hide-on-small-only">GF</th>
+	<th class="table__header hide-on-small-only">GA</th>
+	<th class="table__header">GD</th>
+	<th class="table__header">Pts</th>
+	`;
 
+	// Looping total away + home matches
 	data.standings[0].table.forEach(standing => {
 		elementHtml += `
 		<tr class="table__row">
 			<td class="table__data">${standing.position}</td>
 			<td class="table__data">${standing.team.name}</td>
 			<td class="table__data">${standing.playedGames}</td>
+			<td class="table__data hide-on-small-only">${standing.won}</td>
+			<td class="table__data hide-on-small-only">${standing.draw}</td>
+			<td class="table__data hide-on-small-only">${standing.lost}</td>
+			<td class="table__data hide-on-small-only">${standing.goalsFor}</td>
+			<td class="table__data hide-on-small-only">${standing.goalsAgainst}</td>
 			<td class="table__data">${standing.goalDifference}</td>
 			<td class="table__data">${standing.points}</td>
 		</tr>
 		`;
-
-		document.querySelector('#competition-name').innerHTML = competitionName;
-		document.querySelector('.table__body').innerHTML = elementHtml;
 	});
+
+	document.querySelector('#competition-name').innerHTML = competitionName;
+	document.querySelector('#competition-header').innerHTML = competitionHeader;
+	document.querySelector('.table__body').innerHTML = elementHtml;
 };

@@ -2,23 +2,18 @@
 	margin: 30px auto;
 	font-size: 14px;
 	font-weight: 500;
+	background-color: $light-background-1 !important;
 
 	&-header {
-		background-color: $light-background-1 !important;
+		background-color: $dark-heading !important;
+		color: white;
 	}
 
 	&-item {
+		background-color: $light-background-1 !important;
+
 		#matchDate {
 			color: darkgrey;
-		}
-
-		a {
-			background-color: $dark-heading;
-			margin: 15px auto;
-
-			&:hover {
-				background-color: $dark-heading-hover;
-			}
 		}
 	}
 
