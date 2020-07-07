@@ -57,7 +57,6 @@ export const renderCompetitionMatches = data => {
 			</div>
 			`;
 		}
-
 		// If match array 1
 		else if (matchLength === 1) {
 			elementHtml += `
@@ -71,7 +70,6 @@ export const renderCompetitionMatches = data => {
 			</li>
 			`;
 		}
-
 		// If match array > 1
 		else {
 			elementHtml += `
@@ -128,4 +126,51 @@ export const renderCompetitionStanding = data => {
 	document.querySelector('#competition-name').innerHTML = competitionName;
 	document.querySelector('#competition-header').innerHTML = competitionHeader;
 	document.querySelector('.table__body').innerHTML = elementHtml;
+};
+
+export const renderCompetitionTeams = data => {
+	// Set element header
+	const tagNode = document.createElement('h5');
+	const textNode = document.createTextNode(`${data.competition.name}`);
+	tagNode.appendChild(textNode);
+
+	// Insert element header
+	const container = document.querySelector('.teams__container');
+	container.insertBefore(tagNode, container.firstChild);
+
+	let elementHtml = '';
+
+	data.teams.forEach(team => {
+		elementHtml += `
+		<div class="col s12 m6 l4">
+			<div class="card">
+				<div class="card-image">
+					<img src="${team.crestUrl}">
+					<a class="btn-floating halfway-fab waves-effect waves-light"><i class="material-icons">favorite_border</i></a>
+				</div>
+				<div class="card-content">
+					<p><span>Name:</span> ${team.name}</p>
+					<p><span>Venue:</span> ${team.venue}</p>
+					<p><span>Founded:</span> ${team.founded}</p>
+				</div>
+			</div>
+		</div>
+		`;
+	});
+
+	document.querySelector('.teams').innerHTML = elementHtml;
+
+	document.querySelectorAll('.material-icons').forEach(el => {
+		el.addEventListener('click', () => {
+			if (el.innerHTML === 'favorite_border') {
+				el.innerHTML = 'favorite';
+				el.style.color = 'red';
+			} else if (el.innerHTML === 'favorite') {
+				el.innerHTML = 'favorite_border';
+				el.style.color = 'black';
+			} else {
+				console.log('no property');
+			}
+		});
+	});
 };

@@ -1,0 +1,35 @@
+.teams__container {
+	h5 {
+		margin: 30px auto;
+		text-align: center;
+		color: $dark-heading;
+		font-size: 22px;
+		font-weight: 500;
+	}
+}
+
+.card {
+	margin: 30px auto;
+	height: 350px;
+
+	&-image {
+		img {
+			max-width: 200px;
+			max-height: 200px;
+			margin: 0 auto;
+		}
+
+		i {
+			background-color: white;
+			color: black;
+		}
+	}
+
+	p {
+		color: $dark-background-1;
+
+		span {
+			color: darkgrey;
+		}
+	}
+}

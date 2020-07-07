@@ -6,6 +6,7 @@ import {
 	renderCompetition,
 	renderCompetitionMatches,
 	renderCompetitionStanding,
+	renderCompetitionTeams,
 } from './responseApi.js';
 
 // Base url
@@ -28,6 +29,7 @@ export const getCompetition = (id, elementId, competitionImg) => {
 		.then(status)
 		.then(json)
 		.then(data => {
+			console.log(data);
 			renderCompetition(data, elementId, competitionImg);
 		})
 		.catch(error);
@@ -63,6 +65,7 @@ export const getCompetitionTeams = () => {
 		.then(json)
 		.then(data => {
 			console.log(data);
+			renderCompetitionTeams(data);
 		})
 		.catch(message => error(message));
 };
