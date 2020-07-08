@@ -7,7 +7,7 @@ const DEBUG = false;
 // to what it currently has, it considers it 'new'.
 const { assets } = global.serviceWorkerOption;
 
-const CACHE_NAME = 'pwa-infootball-v1';
+const CACHE_NAME = 'pwa-infootball-v2';
 
 let assetsToCache = [...assets, './'];
 

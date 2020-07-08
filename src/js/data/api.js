@@ -1,4 +1,4 @@
-// Api response
+// Response API
 import {
 	status,
 	json,
@@ -25,9 +25,8 @@ const fetchRequest = {
 
 // Get one particular competition
 export const getCompetition = (id, elementId, competitionImg) => {
-	// get data from cache before request api
 	if ('caches' in window) {
-		caches.match(`${BASE_URL}v2/competitions/${id}`).then(response => {
+		global.caches.match(`${BASE_URL}v2/competitions/${id}`).then(response => {
 			if (response) {
 				response.json().then(data => {
 					renderCompetition(data, elementId, competitionImg);

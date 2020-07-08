@@ -37,33 +37,28 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 
 					// if page is matches
-					else if (page === 'matches') {
-						// Set link back icon and url logo
-						const url = window.location.origin + '/';
-						const back = document.querySelector('.back');
-						const brandLogo = document.querySelector('.brand-logo');
-						back.setAttribute('href', url);
-						brandLogo.setAttribute('href', url);
-
-						// Load competition matches
+					if (page === 'matches') {
 						getCompetitionMatches();
 					}
 
 					// if page is standing
-					else if (page === 'standing') {
-						// Load competition standing
+					if (page === 'standing') {
 						getCompetitionStanding();
 					}
 
 					// if page is teams
-					else if (page === 'teams') {
-						// Load competition teams
+					if (page === 'teams') {
 						getCompetitionTeams();
 					}
 
-					// if page not found
-					else {
-						content.innerHTML = '<p>Halaman tidak ditemukan.</p>';
+					// Set link back icon and url logo
+					if (window.location.pathname === '/competition.html') {
+						const url = window.location.origin + '/';
+						const back = document.querySelector('.back');
+						const brandLogo = document.querySelector('.brand-logo');
+
+						back.setAttribute('href', url);
+						brandLogo.setAttribute('href', url);
 					}
 				} else if (this.status === 404) {
 					content.innerHTML = '<p>Halaman tidak ditemukan.</p>';
@@ -73,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		xhttp.open('GET', `/src/html/pages/${page}.html`, true);
+		xhttp.open('GET', `/html/pages/${page}.html`, true);
 		xhttp.send();
 	};
 	// End load page
@@ -106,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		xhttp.open('GET', '/src/html/navbar.html', true);
+		xhttp.open('GET', '/html/navbar.html', true);
 		xhttp.send();
 	};
 	// End load navigation
@@ -130,26 +125,30 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		xhttp.open('GET', '/src/html/tabs.html', true);
+		xhttp.open('GET', '/html/tabs.html', true);
 		xhttp.send();
 	};
 	// End load tabs
 
-	// Check pathname for routing
+	// Check url pathname and url hash
 	const path = window.location.pathname;
-	let page = '';
+	let page = window.location.hash.substr(1);
 
 	// if path load index.html
 	if (path === '/') {
-		page = 'home';
-		loadPage(page);
-		loadNav();
+		if (page === '') {
+			page = 'home';
+		}
 	}
 
 	// if path load competition.html
 	if (path === '/competition.html') {
-		page = 'matches';
-		loadPage(page);
+		if (page === '') {
+			page = 'matches';
+		}
 		loadTabs();
 	}
+
+	loadPage(page);
+	loadNav();
 });

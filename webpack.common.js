@@ -23,9 +23,6 @@ module.exports = {
 			{
 				test: /\.html$/,
 				loader: 'html-loader',
-				options: {
-					minimize: true,
-				},
 			},
 			// To string loader
 			{
@@ -91,16 +88,65 @@ module.exports = {
 		}),
 		// HTML plugin
 		new HtmlWebpackPlugin({
-			template: './src/index.html',
 			filename: 'index.html',
+			template: './src/index.html',
 			favicon: './src/assets/icons/favicon.png',
 			hash: true,
 		}),
 		new HtmlWebpackPlugin({
-			template: './src/competition.html',
 			filename: 'competition.html',
+			template: './src/competition.html',
 			favicon: './src/assets/icons/favicon.png',
 			hash: true,
+		}),
+		new HtmlWebpackPlugin({
+			filename: '/html/navbar.html',
+			template: './src/html/navbar.html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+			inject: false,
+		}),
+		new HtmlWebpackPlugin({
+			filename: '/html/tabs.html',
+			template: './src/html/tabs.html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+			inject: false,
+		}),
+		new HtmlWebpackPlugin({
+			filename: '/html/pages/home.html',
+			template: './src/html/pages/home.html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+			inject: false,
+		}),
+		new HtmlWebpackPlugin({
+			filename: '/html/pages/about.html',
+			template: './src/html/pages/about.html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+			inject: false,
+		}),
+		new HtmlWebpackPlugin({
+			filename: '/html/pages/standing.html',
+			template: './src/html/pages/standing.html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+			inject: false,
+		}),
+		new HtmlWebpackPlugin({
+			filename: '/html/pages/matches.html',
+			template: './src/html/pages/matches.html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+			inject: false,
+		}),
+		new HtmlWebpackPlugin({
+			filename: '/html/pages/teams.html',
+			template: './src/html/pages/teams.html',
+			favicon: './src/assets/icons/favicon.png',
+			hash: true,
+			inject: false,
 		}),
 		// Pwa manifest plugin
 		new WebpackPwaManifest({
@@ -141,7 +187,11 @@ module.exports = {
 		}),
 		// Service worker webpack plugin
 		new ServiceWorkerWebpackPlugin({
-			entry: path.join(__dirname, './src/sw.js'),
+			entry: path.join(__dirname, '/src/sw.js'),
 		}),
 	],
+	devServer: {
+		contentBase: path.join(__dirname, 'dist'),
+		writeToDisk: true,
+	},
 };
