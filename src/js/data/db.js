@@ -13,8 +13,6 @@ export const saveTeam = team => {
 			const tx = db.transaction('teams', 'readwrite');
 			const store = tx.objectStore('teams');
 
-			console.log(team);
-
 			store.add(team);
 			return tx.complete;
 		})
@@ -32,8 +30,6 @@ export const deleteTeam = team => {
 			const tx = db.transaction('teams', 'readwrite');
 			const store = tx.objectStore('teams');
 
-			console.log(team);
-
 			store.delete(team.id);
 			return tx.complete;
 		})
@@ -43,4 +39,19 @@ export const deleteTeam = team => {
 		.catch(() => {
 			console.log('Delete gagal');
 		});
+};
+
+export const getSavedTeams = () => {
+	return new Promise((resolve, reject) => {
+		dbPromised
+			.then(db => {
+				const tx = db.transaction('teams', 'readonly');
+				const store = tx.objectStore('teams');
+
+				return store.getAll();
+			})
+			.then(teams => {
+				resolve(teams);
+			});
+	});
 };

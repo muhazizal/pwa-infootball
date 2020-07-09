@@ -105,7 +105,6 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: '/html/navbar.html',
 			template: './src/html/navbar.html',
-			favicon: './src/assets/icons/favicon.png',
 			minify: true,
 			hash: true,
 			inject: false,
@@ -113,7 +112,6 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: '/html/tabs.html',
 			template: './src/html/tabs.html',
-			favicon: './src/assets/icons/favicon.png',
 			minify: true,
 			hash: true,
 			inject: false,
@@ -121,15 +119,13 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: '/html/pages/home.html',
 			template: './src/html/pages/home.html',
-			favicon: './src/assets/icons/favicon.png',
 			minify: true,
 			hash: true,
 			inject: false,
 		}),
 		new HtmlWebpackPlugin({
-			filename: '/html/pages/about.html',
-			template: './src/html/pages/about.html',
-			favicon: './src/assets/icons/favicon.png',
+			filename: '/html/pages/favorite.html',
+			template: './src/html/pages/favorite.html',
 			minify: true,
 			hash: true,
 			inject: false,
@@ -137,7 +133,6 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: '/html/pages/standing.html',
 			template: './src/html/pages/standing.html',
-			favicon: './src/assets/icons/favicon.png',
 			minify: true,
 			hash: true,
 			inject: false,
@@ -145,7 +140,6 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: '/html/pages/matches.html',
 			template: './src/html/pages/matches.html',
-			favicon: './src/assets/icons/favicon.png',
 			minify: true,
 			hash: true,
 			inject: false,
@@ -153,7 +147,6 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: '/html/pages/teams.html',
 			template: './src/html/pages/teams.html',
-			favicon: './src/assets/icons/favicon.png',
 			minify: true,
 			hash: true,
 			inject: false,

@@ -1,5 +1,5 @@
 // Import database
-import { saveTeam, deleteTeam } from './db.js';
+import { saveTeam, deleteTeam, getSavedTeams } from './db.js';
 
 // Base url
 const BASE_URL = 'https://api.football-data.org/';
@@ -54,6 +54,44 @@ const renderCompetition = (data, elementId, img) => {
 	`;
 
 	document.getElementById(`${elementId}`).innerHTML = elementHtml;
+};
+
+const renderFavoriteTeams = teams => {
+	let elementContainer = document.querySelector('#favorite-team');
+
+	teams.forEach(team => {
+		elementContainer.innerHTML += `
+			<div class="col s12 m6 l4">
+				<div class="card">
+					<div class="card-image">
+						<img src="${team.crestUrl}">
+					</div>
+					<div class="card-content">
+						<p><span>Name:</span> ${team.name}</p>
+						<p><span>Venue:</span> ${team.venue}</p>
+						<p><span>Founded:</span> ${team.founded}</p>
+						
+					</div>
+					<div class="card-action center-align">
+						<button value="${team.id}" class="btn waves-effect waves-light removeFromFavorite">
+							Delete From Favorite
+						</button>
+					</div>
+				</div>
+			</div>
+		`;
+	});
+
+	document.querySelectorAll('.removeFromFavorite').forEach(btn => {
+		btn.addEventListener('click', () => {
+			fetch(`${BASE_URL}v2/teams/${btn.value}`, fetchRequest)
+				.then(status)
+				.then(json)
+				.then(data => {
+					deleteTeam(data);
+				});
+		});
+	});
 };
 
 // Render competition matches
@@ -175,12 +213,23 @@ const renderCompetitionTeams = data => {
 		`;
 	});
 
-	// Set saveTeam event listener for all button
 	document.querySelectorAll('.addToFavorite').forEach(btnSave => {
-		btnSave.addEventListener('click', () => {
-			const teamId = btnSave.value;
-			const favoriteMdi = btnSave.childNodes[1];
+		// Init teamId and mdi-element
+		const teamId = parseInt(btnSave.value);
+		const favoriteMdi = btnSave.childNodes[1];
 
+		// Check favorite teams
+		getSavedTeams().then(savedTeams => {
+			savedTeams.forEach(savedTeam => {
+				if (savedTeam.id === teamId) {
+					favoriteMdi.innerHTML = 'favorite';
+					favoriteMdi.style.color = 'red';
+				}
+			});
+		});
+
+		// Set saveTeam event listener for all button
+		btnSave.addEventListener('click', () => {
 			if (favoriteMdi.innerHTML === 'favorite_border') {
 				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
 					.then(status)
@@ -205,8 +254,6 @@ const renderCompetitionTeams = data => {
 						favoriteMdi.style.color = 'black';
 					});
 			}
-
-			// team.id from btn value
 		});
 	});
 };
@@ -292,4 +339,10 @@ export const getCompetitionTeams = () => {
 			renderCompetitionTeams(data);
 		})
 		.catch(message => error(message));
+};
+
+export const getFavoriteTeams = () => {
+	getSavedTeams().then(teams => {
+		renderFavoriteTeams(teams);
+	});
 };

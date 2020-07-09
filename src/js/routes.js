@@ -1,4 +1,10 @@
-import { getCompetition, getCompetitionMatches, getCompetitionStanding, getCompetitionTeams } from './data/api.js';
+import {
+	getCompetition,
+	getCompetitionMatches,
+	getCompetitionStanding,
+	getCompetitionTeams,
+	getFavoriteTeams,
+} from './data/api.js';
 
 // Import league images
 import premierImg from '../assets/images/premier.svg';
@@ -33,6 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
 						getCompetition('2021', 'english', premierImg);
 						getCompetition('2014', 'spain', laligaImg);
 						getCompetition('2019', 'serieA', serieAImg);
+					}
+
+					if (page === 'favorite') {
+						getFavoriteTeams();
 					}
 
 					// if page is matches
