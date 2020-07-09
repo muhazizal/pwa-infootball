@@ -14,7 +14,7 @@ module.exports = {
 		vendors: ['webpack-material-design-icons'],
 	},
 	output: {
-		filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
+		filename: isDevelopment ? '[name].js' : 'js/[name].[contenthash].js',
 		path: path.resolve(__dirname, 'dist'),
 	},
 	module: {
@@ -65,6 +65,7 @@ module.exports = {
 				},
 			},
 			// File loader for fonts
+			// Output has the same path level as CSS file
 			{
 				test: /\.(eot|woff|ttf|woff2|otf)$/,
 				use: [
@@ -91,18 +92,21 @@ module.exports = {
 			filename: 'index.html',
 			template: './src/index.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'competition.html',
 			template: './src/competition.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 		}),
 		new HtmlWebpackPlugin({
 			filename: '/html/navbar.html',
 			template: './src/html/navbar.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 			inject: false,
 		}),
@@ -110,6 +114,7 @@ module.exports = {
 			filename: '/html/tabs.html',
 			template: './src/html/tabs.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 			inject: false,
 		}),
@@ -117,6 +122,7 @@ module.exports = {
 			filename: '/html/pages/home.html',
 			template: './src/html/pages/home.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 			inject: false,
 		}),
@@ -124,6 +130,7 @@ module.exports = {
 			filename: '/html/pages/about.html',
 			template: './src/html/pages/about.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 			inject: false,
 		}),
@@ -131,6 +138,7 @@ module.exports = {
 			filename: '/html/pages/standing.html',
 			template: './src/html/pages/standing.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 			inject: false,
 		}),
@@ -138,6 +146,7 @@ module.exports = {
 			filename: '/html/pages/matches.html',
 			template: './src/html/pages/matches.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 			inject: false,
 		}),
@@ -145,6 +154,7 @@ module.exports = {
 			filename: '/html/pages/teams.html',
 			template: './src/html/pages/teams.html',
 			favicon: './src/assets/icons/favicon.png',
+			minify: true,
 			hash: true,
 			inject: false,
 		}),
@@ -191,7 +201,9 @@ module.exports = {
 		}),
 	],
 	devServer: {
+		// Serve file from dist folder
 		contentBase: path.join(__dirname, 'dist'),
 		writeToDisk: true,
 	},
+	devtool: 'inline-source-map',
 };

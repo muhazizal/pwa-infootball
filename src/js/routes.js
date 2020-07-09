@@ -1,4 +1,3 @@
-// Import competition
 import { getCompetition, getCompetitionMatches, getCompetitionStanding, getCompetitionTeams } from './data/api.js';
 
 // Import league images

@@ -5,7 +5,13 @@ import './js/materialize.min.js';
 // Import service-worker registration
 import './js/reg-sw.js';
 
-// Import data
+// Import indexed db
+import './js/data/idb.js';
+
+// Import database
+import './js/data/db.js';
+
+// Import data api
 import './js/data/api.js';
 
 // Import navbar
