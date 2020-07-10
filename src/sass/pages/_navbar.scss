@@ -6,19 +6,30 @@ nav {
 		color: $dark-heading;
 		font-weight: 600;
 	}
+
+	li {
+		a {
+			color: black;
+			padding: 0 25px;
+
+			i {
+				color: $dark-heading !important;
+			}
+		}
+	}
 }
 
 .sidenav {
 	background-color: $light-background-1;
-}
 
-li {
-	a {
-		color: black;
-		padding: 0 25px;
+	li {
+		a {
+			color: black;
+			padding: 0 25px;
 
-		i {
-			color: $dark-heading !important;
+			i {
+				color: $dark-heading !important;
+			}
 		}
 	}
 }

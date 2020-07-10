@@ -15,6 +15,9 @@ const fetchRequest = {
 	},
 };
 
+// Preloader
+let preloader = document.querySelector('.progress');
+
 // Check response result
 const status = response => {
 	if (response.status !== 200) {
@@ -199,6 +202,8 @@ const renderCompetitionTeams = data => {
 
 		// Set saveTeam event listener for all button
 		btnSave.addEventListener('click', () => {
+			preloader.style.display = 'block';
+
 			// If not saved, then save
 			if (favoriteMdi.innerHTML === 'favorite_border') {
 				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
@@ -264,6 +269,8 @@ const renderFavoriteTeams = teams => {
 	// Add event listener delete team for each button
 	document.querySelectorAll('.removeFromFavorite').forEach(btn => {
 		btn.addEventListener('click', () => {
+			preloader.style.display = 'block';
+
 			fetch(`${BASE_URL}v2/teams/${btn.value}`, fetchRequest)
 				.then(status)
 				.then(json)

@@ -9,6 +9,9 @@ const dbPromised = idb.open('pwa-infootball', 1, upgradeDb => {
 	teamsObjectStore.createIndex('name', 'name', { unique: true, multiEntry: true });
 });
 
+// Preloader
+const preloader = document.querySelector('.progress');
+
 // Save favorite team
 export const saveTeam = team => {
 	dbPromised
@@ -20,10 +23,14 @@ export const saveTeam = team => {
 			return tx.complete;
 		})
 		.then(() => {
-			console.log('Team berhasil disimpan');
+			preloader.style.display = 'none';
+			M.toast({
+				html: `${team.name} has been added to favorite`,
+				displayLength: 3000,
+			});
 		})
 		.catch(() => {
-			console.log('Team gagal disimpan');
+			console.log('Failed to save');
 		});
 };
 
@@ -38,10 +45,14 @@ export const deleteTeam = team => {
 			return tx.complete;
 		})
 		.then(() => {
-			console.log('Team deleted');
+			preloader.style.display = 'none';
+			M.toast({
+				html: `${team.name} has been deleted from favorite`,
+				displayLength: 3000,
+			});
 		})
 		.catch(() => {
-			console.log('Delete gagal');
+			console.log('Failed to delete');
 		});
 };
 

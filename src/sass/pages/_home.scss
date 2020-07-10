@@ -1,11 +1,17 @@
 .progress {
 	margin: 0;
-	background-color: $light-heading;
+	background-color: $dark-background-1;
 	display: none;
+	position: fixed;
 
 	.indeterminate {
-		background-color: $dark-heading;
+		background-color: $light-heading;
 	}
+}
+
+.toast {
+	background-color: $dark-background-1;
+	color: $light-heading;
 }
 
 .home {

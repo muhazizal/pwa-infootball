@@ -34,15 +34,19 @@
 			}
 		}
 	}
+}
 
-	#favorite-header {
+#favorite {
+	margin-top: 0;
+
+	&-header {
 		font-size: 28px;
 		font-weight: 500;
 		margin: 39px auto;
 		color: black;
 	}
 
-	#favorite-team {
+	&-team {
 		.card {
 			height: 380px;
 		}
