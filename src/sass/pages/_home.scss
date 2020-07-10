@@ -1,3 +1,13 @@
+.progress {
+	margin: 0;
+	background-color: $light-heading;
+	display: none;
+
+	.indeterminate {
+		background-color: $dark-heading;
+	}
+}
+
 .home {
 	&__header {
 		font-size: 28px;

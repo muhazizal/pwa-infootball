@@ -11,6 +11,8 @@ import premierImg from '../assets/images/premier.svg';
 import laligaImg from '../assets/images/laliga.svg';
 import serieAImg from '../assets/images/serieA.svg';
 
+const preloader = document.querySelector('.progress');
+
 document.addEventListener('DOMContentLoaded', () => {
 	// Activate sidenav
 	const el = document.querySelectorAll('.sidenav');
@@ -21,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		const xhttp = new XMLHttpRequest();
 
 		xhttp.onreadystatechange = function () {
+			// Fire preloader on statechange
+			preloader.style.display = 'block';
+
 			if (this.readyState === 4) {
 				const content = document.querySelector('#main-content');
 
@@ -79,6 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		xhttp.open('GET', `/html/pages/${page}.html`, true);
 		xhttp.send();
+
+		// Close preloader after content loaded
+		xhttp.onload = () => {
+			preloader.style.display = 'none';
+		};
 	};
 	// End load page
 

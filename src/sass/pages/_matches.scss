@@ -1,25 +1,29 @@
-.collection {
-	margin: 30px auto;
-	font-size: 14px;
-	font-weight: 500;
-	background-color: $light-background-1 !important;
+.matches__container {
+	margin-top: 85px;
 
-	&-header {
-		background-color: $dark-heading !important;
-		color: white;
-	}
-
-	&-item {
+	.collection {
+		margin: 30px auto;
+		font-size: 14px;
+		font-weight: 500;
 		background-color: $light-background-1 !important;
 
-		#matchDate {
-			color: darkgrey;
+		&-header {
+			background-color: $dark-heading !important;
+			color: white;
 		}
-	}
 
-	h5 {
-		margin: 15px 0;
-		font-size: 20px;
-		font-weight: 500;
+		&-item {
+			background-color: $light-background-1 !important;
+
+			#matchDate {
+				color: darkgrey;
+			}
+		}
+
+		h5 {
+			margin: 15px 0;
+			font-size: 20px;
+			font-weight: 500;
+		}
 	}
 }

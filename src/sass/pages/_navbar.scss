@@ -1,24 +1,24 @@
 nav {
 	background-color: $light-background-1;
 
-	.sidenav {
-		background-color: $light-background-1;
-	}
-
 	.brand-logo,
 	.sidenav-trigger {
 		color: $dark-heading;
 		font-weight: 600;
 	}
+}
 
-	li {
-		a {
-			color: black;
-			padding: 0 25px;
+.sidenav {
+	background-color: $light-background-1;
+}
 
-			i {
-				color: $dark-heading !important;
-			}
+li {
+	a {
+		color: black;
+		padding: 0 25px;
+
+		i {
+			color: $dark-heading !important;
 		}
 	}
 }
