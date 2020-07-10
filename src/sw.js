@@ -82,7 +82,7 @@ self.addEventListener('fetch', event => {
 
 	if (event.request.url.indexOf(BASE_URL) > -1) {
 		event.respondWith(
-			global.caches.open(CACHE_NAME).then(cache => {
+			caches.open(CACHE_NAME).then(cache => {
 				return fetch(event.request).then(response => {
 					if (DEBUG) {
 						console.log(response);
@@ -95,7 +95,7 @@ self.addEventListener('fetch', event => {
 		);
 	} else {
 		event.respondWith(
-			global.caches.match(event.request, { ignoreSearch: true }).then(response => {
+			caches.match(event.request, { ignoreSearch: true }).then(response => {
 				if (DEBUG) {
 					console.log(response);
 				}

@@ -25,21 +25,23 @@ const status = response => {
 	}
 };
 
-// Turn response into json
+// Turn data response into json
 const json = response => {
 	return response.json();
 };
 
-// Show message on error response
+// Show message on reject response
 const error = error => {
 	console.log('Error: ' + error);
 };
 
 // Render competition
 const renderCompetition = (data, elementId, img) => {
+	// Url
 	const url = window.location.origin;
 	let elementHtml = '';
 
+	// Print element
 	elementHtml += `
 		<a class="competition" href="${url}/competition.html?id=${data.id}">
 			<div class="card">
@@ -56,50 +58,13 @@ const renderCompetition = (data, elementId, img) => {
 	document.getElementById(`${elementId}`).innerHTML = elementHtml;
 };
 
-const renderFavoriteTeams = teams => {
-	let elementContainer = document.querySelector('#favorite-team');
-
-	teams.forEach(team => {
-		elementContainer.innerHTML += `
-			<div class="col s12 m6 l4">
-				<div class="card">
-					<div class="card-image">
-						<img src="${team.crestUrl}">
-					</div>
-					<div class="card-content">
-						<p><span>Name:</span> ${team.name}</p>
-						<p><span>Venue:</span> ${team.venue}</p>
-						<p><span>Founded:</span> ${team.founded}</p>
-						
-					</div>
-					<div class="card-action center-align">
-						<button value="${team.id}" class="btn waves-effect waves-light removeFromFavorite">
-							Delete From Favorite
-						</button>
-					</div>
-				</div>
-			</div>
-		`;
-	});
-
-	document.querySelectorAll('.removeFromFavorite').forEach(btn => {
-		btn.addEventListener('click', () => {
-			fetch(`${BASE_URL}v2/teams/${btn.value}`, fetchRequest)
-				.then(status)
-				.then(json)
-				.then(data => {
-					deleteTeam(data);
-				});
-		});
-	});
-};
-
 // Render competition matches
 const renderCompetitionMatches = data => {
 	let elementHtml = '';
 	const matchLength = data.matches.length;
 	const competitionName = `<li class="collection-header center-align"><h5>${data.competition.name}</h5></li>`;
 
+	// Loop data and print element
 	data.matches.forEach(match => {
 		let matchDate = match.utcDate.substr(0, 10) + ' | ' + match.utcDate.substr(11, 18);
 
@@ -114,36 +79,37 @@ const renderCompetitionMatches = data => {
 		// If match array 1
 		else if (matchLength === 1) {
 			elementHtml += `
-			<li class="collection-item col s12">
-				<div class="center-align block">
-					<p>${match.awayTeam.name}</p>
-					<p>VS</p>
-					<p>${match.homeTeam.name}</p>
-					<p id="matchDate">${matchDate}</p>
-				</div>
-			</li>
+				<li class="collection-item col s12">
+					<div class="center-align block">
+						<p>${match.awayTeam.name}</p>
+						<p>VS</p>
+						<p>${match.homeTeam.name}</p>
+						<p id="matchDate">${matchDate}</p>
+					</div>
+				</li>
 			`;
 		}
 		// If match array > 1
 		else {
 			elementHtml += `
-			<li class="collection-item col s12 m6 l4">
-				<div class="center-align block">
-					<p>${match.awayTeam.name}</p>
-					<p>VS</p>
-					<p>${match.homeTeam.name}</p>
-					<p id="matchDate">${matchDate}</p>
-				</div>
-			</li>
+				<li class="collection-item col s12 m6 l4">
+					<div class="center-align block">
+						<p>${match.awayTeam.name}</p>
+						<p>VS</p>
+						<p>${match.homeTeam.name}</p>
+						<p id="matchDate">${matchDate}</p>
+					</div>
+				</li>
 			`;
 		}
-
-		document.querySelector('.collection').innerHTML = competitionName + elementHtml;
 	});
+
+	document.querySelector('.collection').innerHTML = competitionName + elementHtml;
 };
 
 // Render competition standing
 const renderCompetitionStanding = data => {
+	// Init element
 	let elementHtml = '';
 	const competitionName = `<th class="table__header" colspan="10">${data.competition.name}</th>`;
 	const competitionHeader = `
@@ -184,35 +150,37 @@ const renderCompetitionStanding = data => {
 
 // Render competition teams
 const renderCompetitionTeams = data => {
-	// Set element header
+	// Set header competition
 	document.querySelector('.teams__header').innerHTML = data.competition.name;
 
 	// Set team card
 	const teams = data.teams;
-	let teamContainer = document.querySelector('.teams');
-	teamContainer.innerHTML = '';
+	let elementHtml = '';
 
 	// Loop for team card
 	teams.forEach(team => {
-		teamContainer.innerHTML += `
-		<div class="col s12 m6 l4">
-			<div class="card">
-				<div class="card-image">
-					<img src="${team.crestUrl}">
-					<button value="${team.id}" class="btn-floating halfway-fab waves-effect waves-light addToFavorite">
-						<i class="material-icons">favorite_border</i>
-					</button>
-				</div>
-				<div class="card-content">
-					<p><span>Name:</span> ${team.name}</p>
-					<p><span>Venue:</span> ${team.venue}</p>
-					<p><span>Founded:</span> ${team.founded}</p>
+		elementHtml += `
+			<div class="col s12 m6 l4">
+				<div class="card">
+					<div class="card-image">
+						<img src="${team.crestUrl}">
+						<button value="${team.id}" class="btn-floating halfway-fab waves-effect waves-light addToFavorite">
+							<i class="material-icons">favorite_border</i>
+						</button>
+					</div>
+					<div class="card-content">
+						<p><span>Name:</span> ${team.name}</p>
+						<p><span>Venue:</span> ${team.venue}</p>
+						<p><span>Founded:</span> ${team.founded}</p>
+					</div>
 				</div>
 			</div>
-		</div>
 		`;
+
+		document.querySelector('.teams').innerHTML = elementHtml;
 	});
 
+	// Loop all button save
 	document.querySelectorAll('.addToFavorite').forEach(btnSave => {
 		// Init teamId and mdi-element
 		const teamId = parseInt(btnSave.value);
@@ -221,6 +189,7 @@ const renderCompetitionTeams = data => {
 		// Check favorite teams
 		getSavedTeams().then(savedTeams => {
 			savedTeams.forEach(savedTeam => {
+				// If match, turn favorite to red
 				if (savedTeam.id === teamId) {
 					favoriteMdi.innerHTML = 'favorite';
 					favoriteMdi.style.color = 'red';
@@ -230,6 +199,7 @@ const renderCompetitionTeams = data => {
 
 		// Set saveTeam event listener for all button
 		btnSave.addEventListener('click', () => {
+			// If not saved, then save
 			if (favoriteMdi.innerHTML === 'favorite_border') {
 				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
 					.then(status)
@@ -242,6 +212,8 @@ const renderCompetitionTeams = data => {
 						favoriteMdi.style.color = 'red';
 					});
 			}
+
+			// If saved, then delete
 			if (favoriteMdi.innerHTML === 'favorite') {
 				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
 					.then(status)
@@ -258,8 +230,64 @@ const renderCompetitionTeams = data => {
 	});
 };
 
+// Render favorite teams
+const renderFavoriteTeams = teams => {
+	// Init element
+	let elementHtml = '';
+
+	// Loop for team card
+	teams.forEach(team => {
+		elementHtml += `
+			<div class="col s12 m6 l4">
+				<div class="card">
+					<div class="card-image">
+						<img src="${team.crestUrl}">
+					</div>
+					<div class="card-content">
+						<p><span>Name:</span> ${team.name}</p>
+						<p><span>Venue:</span> ${team.venue}</p>
+						<p><span>Founded:</span> ${team.founded}</p>
+						
+					</div>
+					<div class="card-action center-align">
+						<button value="${team.id}" class="btn waves-effect waves-light removeFromFavorite">
+							Delete From Favorite
+						</button>
+					</div>
+				</div>
+			</div>
+		`;
+	});
+
+	document.querySelector('#favorite-team').innerHTML = elementHtml;
+
+	// Add event listener delete team for each button
+	document.querySelectorAll('.removeFromFavorite').forEach(btn => {
+		btn.addEventListener('click', () => {
+			fetch(`${BASE_URL}v2/teams/${btn.value}`, fetchRequest)
+				.then(status)
+				.then(json)
+				.then(data => {
+					deleteTeam(data);
+				})
+				.then(() => {
+					// Delete old card
+					let favoriteTeamContainer = document.querySelectorAll('.col');
+					favoriteTeamContainer.forEach(card => {
+						card.parentNode.removeChild(card);
+					});
+				})
+				.then(() => {
+					// Render new card
+					getFavoriteTeams();
+				});
+		});
+	});
+};
+
 // Get one particular competition
 export const getCompetition = (id, elementId, competitionImg) => {
+	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions/${id}`).then(response => {
 			if (response) {
@@ -270,6 +298,7 @@ export const getCompetition = (id, elementId, competitionImg) => {
 		});
 	}
 
+	// Fetch competition
 	fetch(`${BASE_URL}v2/competitions/${id}`, fetchRequest)
 		.then(status)
 		.then(json)
@@ -281,6 +310,7 @@ export const getCompetition = (id, elementId, competitionImg) => {
 
 // Get competition matches
 export const getCompetitionMatches = () => {
+	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`).then(response => {
 			if (response) {
@@ -291,6 +321,7 @@ export const getCompetitionMatches = () => {
 		});
 	}
 
+	// Fetch competition matches
 	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`, fetchRequest)
 		.then(status)
 		.then(json)
@@ -302,6 +333,7 @@ export const getCompetitionMatches = () => {
 
 // Get competition standing
 export const getCompetitionStanding = () => {
+	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`).then(response => {
 			if (response) {
@@ -312,6 +344,7 @@ export const getCompetitionStanding = () => {
 		});
 	}
 
+	// Render competition standings
 	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`, fetchRequest)
 		.then(status)
 		.then(json)
@@ -321,7 +354,9 @@ export const getCompetitionStanding = () => {
 		.catch(error);
 };
 
+// Get competition teams
 export const getCompetitionTeams = () => {
+	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`).then(response => {
 			if (response) {
@@ -332,6 +367,7 @@ export const getCompetitionTeams = () => {
 		});
 	}
 
+	// Fetch competition teams
 	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`, fetchRequest)
 		.then(status)
 		.then(json)
@@ -341,6 +377,7 @@ export const getCompetitionTeams = () => {
 		.catch(message => error(message));
 };
 
+// Get favorite teams
 export const getFavoriteTeams = () => {
 	getSavedTeams().then(teams => {
 		renderFavoriteTeams(teams);

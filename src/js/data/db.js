@@ -1,5 +1,7 @@
+// Init idb
 const { default: idb } = require('./idb');
 
+// Create teams object store and index
 const dbPromised = idb.open('pwa-infootball', 1, upgradeDb => {
 	const teamsObjectStore = upgradeDb.createObjectStore('teams', {
 		keyPath: 'id',
@@ -7,6 +9,7 @@ const dbPromised = idb.open('pwa-infootball', 1, upgradeDb => {
 	teamsObjectStore.createIndex('name', 'name', { unique: true, multiEntry: true });
 });
 
+// Save favorite team
 export const saveTeam = team => {
 	dbPromised
 		.then(db => {
@@ -24,6 +27,7 @@ export const saveTeam = team => {
 		});
 };
 
+// Delete favorite team
 export const deleteTeam = team => {
 	dbPromised
 		.then(db => {
@@ -41,6 +45,7 @@ export const deleteTeam = team => {
 		});
 };
 
+// Get all saved teams
 export const getSavedTeams = () => {
 	return new Promise((resolve, reject) => {
 		dbPromised
