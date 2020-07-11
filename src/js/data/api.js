@@ -351,24 +351,6 @@ const renderFavoriteTeams = teams => {
 					}
 				});
 			}
-
-			fetch(`${BASE_URL}v2/teams/${btn.value}`, fetchRequest)
-				.then(status)
-				.then(json)
-				.then(data => {
-					deleteTeam(data);
-				})
-				.then(() => {
-					// Delete old card
-					let favoriteTeamContainer = document.querySelectorAll('.col');
-					favoriteTeamContainer.forEach(card => {
-						card.parentNode.removeChild(card);
-					});
-				})
-				.then(() => {
-					// Render new card
-					getFavoriteTeams();
-				});
 		});
 	});
 };
