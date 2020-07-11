@@ -154,6 +154,7 @@ module.exports = {
 		// Pwa manifest plugin
 		new WebpackPwaManifest({
 			name: 'PWA Infootball',
+			gcm_sender_id: '940729100277',
 			short_name: 'Infootball',
 			orientation: 'portrait',
 			display: 'standalone',

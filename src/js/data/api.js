@@ -206,6 +206,22 @@ const renderCompetitionTeams = data => {
 
 			// If not saved, then save
 			if (favoriteMdi.innerHTML === 'favorite_border') {
+				if ('caches' in window) {
+					global.caches.match(`${BASE_URL}v2/teams/${teamId}`, fetchRequest).then(response => {
+						if (response) {
+							response
+								.json()
+								.then(data => {
+									saveTeam(data);
+								})
+								.then(() => {
+									favoriteMdi.innerHTML = 'favorite';
+									favoriteMdi.style.color = 'red';
+								});
+						}
+					});
+				}
+
 				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
 					.then(status)
 					.then(json)
@@ -220,6 +236,22 @@ const renderCompetitionTeams = data => {
 
 			// If saved, then delete
 			if (favoriteMdi.innerHTML === 'favorite') {
+				if ('caches' in window) {
+					global.caches.match(`${BASE_URL}v2/teams/${teamId}`, fetchRequest).then(response => {
+						if (response) {
+							response
+								.json()
+								.then(data => {
+									deleteTeam(data);
+								})
+								.then(() => {
+									favoriteMdi.innerHTML = 'favorite_border';
+									favoriteMdi.style.color = 'black';
+								});
+						}
+					});
+				}
+
 				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
 					.then(status)
 					.then(json)
@@ -270,6 +302,29 @@ const renderFavoriteTeams = teams => {
 	document.querySelectorAll('.removeFromFavorite').forEach(btn => {
 		btn.addEventListener('click', () => {
 			preloader.style.display = 'block';
+
+			if ('caches' in window) {
+				global.caches.match(`${BASE_URL}v2/teams/${btn.value}`).then(response => {
+					if (response) {
+						response
+							.json()
+							.then(data => {
+								deleteTeam(data);
+							})
+							.then(() => {
+								// Delete old card
+								let favoriteTeamContainer = document.querySelectorAll('.col');
+								favoriteTeamContainer.forEach(card => {
+									card.parentNode.removeChild(card);
+								});
+							})
+							.then(() => {
+								// Render new card
+								getFavoriteTeams();
+							});
+					}
+				});
+			}
 
 			fetch(`${BASE_URL}v2/teams/${btn.value}`, fetchRequest)
 				.then(status)
