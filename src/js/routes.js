@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		xhttp.open('GET', `../html/pages/${page}.html`, true);
+		xhttp.open('GET', `/html/pages/${page}.html`, true);
 		xhttp.send();
 
 		// Close preloader after content loaded
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		xhttp.open('GET', '../html/navbar.html', true);
+		xhttp.open('GET', '/html/navbar.html', true);
 		xhttp.send();
 	};
 	// End load navigation
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		xhttp.open('GET', '../html/tabs.html', true);
+		xhttp.open('GET', '/html/tabs.html', true);
 		xhttp.send();
 	};
 	// End load tabs
