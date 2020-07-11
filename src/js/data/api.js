@@ -15,6 +15,11 @@ const fetchRequest = {
 	},
 };
 
+// Import league images
+import premierImg from '../../assets/images/premier.svg';
+import laligaImg from '../../assets/images/laliga.svg';
+import serieAImg from '../../assets/images/serieA.svg';
+
 // Preloader
 let preloader = document.querySelector('.progress');
 
@@ -39,26 +44,58 @@ const error = error => {
 };
 
 // Render competition
-const renderCompetition = (data, elementId, img) => {
+const renderCompetition = data => {
 	// Url
 	const url = window.location.origin;
-	let elementHtml = '';
 
 	// Print element
-	elementHtml += `
-		<a class="competition" href="${url}/competition.html?id=${data.id}">
-			<div class="card">
-				<div class="card-image waves-effect waves-block waves-light">
-					<img src="${img}">
-				</div>
-				<div class="card-content">
-					<p>${data.name}</p>
-				</div>
-			</div>
-		</a>
-	`;
-
-	document.getElementById(`${elementId}`).innerHTML = elementHtml;
+	data.competitions.forEach(competition => {
+		// If premier league
+		if (competition.id === 2021) {
+			document.querySelector('#english').innerHTML = `
+				<a class="competition" href="${url}/competition.html?id=${competition.id}">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img src="${premierImg}">
+						</div>
+						<div class="card-content">
+							<p>${competition.name}</p>
+						</div>
+					</div>
+				</a>
+			`;
+		}
+		// If serie A
+		if (competition.id === 2019) {
+			document.querySelector('#serieA').innerHTML = `
+				<a class="competition" href="${url}/competition.html?id=${competition.id}">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img src="${serieAImg}">
+						</div>
+						<div class="card-content">
+							<p>${competition.name}</p>
+						</div>
+					</div>
+				</a>
+			`;
+		}
+		// If la liga
+		if (competition.id === 2014) {
+			document.querySelector('#spain').innerHTML = `
+				<a class="competition" href="${url}/competition.html?id=${competition.id}">
+					<div class="card">
+						<div class="card-image waves-effect waves-block waves-light">
+							<img src="${laligaImg}">
+						</div>
+						<div class="card-content">
+							<p>${competition.name}</p>
+						</div>
+					</div>
+				</a>
+			`;
+		}
+	});
 };
 
 // Render competition matches
@@ -251,17 +288,6 @@ const renderCompetitionTeams = data => {
 						}
 					});
 				}
-
-				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
-					.then(status)
-					.then(json)
-					.then(data => {
-						deleteTeam(data);
-					})
-					.then(() => {
-						favoriteMdi.innerHTML = 'favorite_border';
-						favoriteMdi.style.color = 'black';
-					});
 			}
 		});
 	});
@@ -348,24 +374,24 @@ const renderFavoriteTeams = teams => {
 };
 
 // Get one particular competition
-export const getCompetition = (id, elementId, competitionImg) => {
+export const getCompetition = () => {
 	// If cached
 	if ('caches' in window) {
-		global.caches.match(`${BASE_URL}v2/competitions/${id}`).then(response => {
+		global.caches.match(`${BASE_URL}v2/competitions?plan=TIER_ONE`).then(response => {
 			if (response) {
 				response.json().then(data => {
-					renderCompetition(data, elementId, competitionImg);
+					renderCompetition(data);
 				});
 			}
 		});
 	}
 
 	// Fetch competition
-	fetch(`${BASE_URL}v2/competitions/${id}`, fetchRequest)
+	fetch(`${BASE_URL}v2/competitions?plan=TIER_ONE`, fetchRequest)
 		.then(status)
 		.then(json)
 		.then(data => {
-			renderCompetition(data, elementId, competitionImg);
+			renderCompetition(data);
 		})
 		.catch(error);
 };

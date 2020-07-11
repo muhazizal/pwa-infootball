@@ -6,11 +6,6 @@ import {
 	getFavoriteTeams,
 } from './data/api.js';
 
-// Import league images
-import premierImg from '../assets/images/premier.svg';
-import laligaImg from '../assets/images/laliga.svg';
-import serieAImg from '../assets/images/serieA.svg';
-
 const preloader = document.querySelector('.progress');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,15 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					// If page is home
 					if (page === 'home') {
 						// Activate carousel on homepage
-						const el = document.querySelectorAll('.carousel');
-						M.Carousel.init(el, {
-							numVisible: 3,
-						});
+						const el = document.querySelector('.carousel');
+						M.Carousel.init(el);
 
 						// Load competition carousel
-						getCompetition('2021', 'english', premierImg);
-						getCompetition('2014', 'spain', laligaImg);
-						getCompetition('2019', 'serieA', serieAImg);
+						getCompetition();
 					}
 
 					if (page === 'favorite') {

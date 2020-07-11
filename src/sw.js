@@ -85,7 +85,7 @@ self.addEventListener('fetch', event => {
 			caches.open(CACHE_NAME).then(cache => {
 				return fetch(event.request).then(response => {
 					if (DEBUG) {
-						console.log(response);
+						console.log('[SW] Cache');
 					}
 
 					cache.put(event.request.url, response.clone());
@@ -97,7 +97,7 @@ self.addEventListener('fetch', event => {
 		event.respondWith(
 			caches.match(event.request, { ignoreSearch: true }).then(response => {
 				if (DEBUG) {
-					console.log(response);
+					console.log('[SW] Fetch');
 				}
 
 				return response || fetch(event.request);

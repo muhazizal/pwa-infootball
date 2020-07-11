@@ -48,7 +48,11 @@
 
 	&-team {
 		.card {
-			height: 380px;
+			height: 400px;
+
+			&-action {
+				padding: 25px;
+			}
 		}
 
 		.removeFromFavorite {
