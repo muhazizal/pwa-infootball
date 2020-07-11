@@ -9,3 +9,6 @@ npm run serve
 
 # Run build
 npm run build
+
+# Testing and Deployment
+https://infootball.netlify.app
