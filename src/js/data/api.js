@@ -199,6 +199,8 @@ const renderCompetitionTeams = data => {
 
 	// Loop for team card
 	teams.forEach(team => {
+		team.crestUrl = team.crestUrl.replace(/^http:\/\//i, 'https://');
+
 		elementHtml += `
 			<div class="col s12 m6 l4">
 				<div class="card">
@@ -300,6 +302,8 @@ const renderFavoriteTeams = teams => {
 
 	// Loop for team card
 	teams.forEach(team => {
+		team.crestUrl = team.crestUrl.replace(/^http:\/\//i, 'https://');
+
 		elementHtml += `
 			<div class="col s12 m6 l4">
 				<div class="card">
