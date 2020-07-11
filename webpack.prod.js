@@ -10,28 +10,28 @@ module.exports = merge(common, {
 	module: {
 		rules: [
 			// Chain eslint and babel loader
-			{
-				test: /\.js$/,
-				exclude: '/node_modules/',
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: ['@babel/preset-env'],
-						},
-					},
-					{
-						loader: 'eslint-loader',
-						options: {
-							cache: true,
-							fix: true,
-							formatter: 'stylish',
-							quiet: true,
-							emitWarning: true,
-						},
-					},
-				],
-			},
+			// {
+			// 	test: /\.js$/,
+			// 	exclude: '/node_modules/',
+			// 	use: [
+			// 		{
+			// 			loader: 'babel-loader',
+			// 			options: {
+			// 				presets: ['@babel/preset-env'],
+			// 			},
+			// 		},
+			// 		{
+			// 			loader: 'eslint-loader',
+			// 			options: {
+			// 				cache: true,
+			// 				fix: true,
+			// 				formatter: 'stylish',
+			// 				quiet: true,
+			// 				emitWarning: true,
+			// 			},
+			// 		},
+			// 	],
+			// },
 		],
 	},
 	optimization: {
@@ -59,15 +59,15 @@ module.exports = merge(common, {
 		minimize: true,
 		minimizer: [
 			// Minify js plugin
-			// new TerserPlugin({
-			// 	test: /\.js(\?.*)?$/i,
-			// 	include: '/src/app.js',
-			// 	// exclude: '/node_modules/',
-			// 	cache: true,
-			// 	parallel: true,
-			// 	sourceMap: true,
-			// 	extractComments: true,
-			// }),
+			new TerserPlugin({
+				test: /\.js(\?.*)?$/i,
+				include: '/src/app.js',
+				// exclude: '/node_modules/',
+				cache: true,
+				parallel: true,
+				sourceMap: true,
+				extractComments: true,
+			}),
 			// Minify css plugin
 			new OptimizeCSSAssetsPlugin({}),
 		],
