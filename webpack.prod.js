@@ -10,28 +10,28 @@ module.exports = merge(common, {
 	module: {
 		rules: [
 			// Chain eslint and babel loader
-			// {
-			// 	test: /\.js$/,
-			// 	exclude: '/node_modules/',
-			// 	use: [
-			// 		{
-			// 			loader: 'babel-loader',
-			// 			options: {
-			// 				presets: ['@babel/preset-env'],
-			// 			},
-			// 		},
-			// 		{
-			// 			loader: 'eslint-loader',
-			// 			options: {
-			// 				cache: true,
-			// 				fix: true,
-			// 				formatter: 'stylish',
-			// 				quiet: true,
-			// 				emitWarning: true,
-			// 			},
-			// 		},
-			// 	],
-			// },
+			{
+				test: /\.js$/,
+				exclude: '/node_modules/',
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							presets: ['@babel/preset-env'],
+						},
+					},
+					{
+						loader: 'eslint-loader',
+						options: {
+							cache: true,
+							fix: true,
+							formatter: 'stylish',
+							quiet: true,
+							emitWarning: true,
+						},
+					},
+				],
+			},
 		],
 	},
 	optimization: {
