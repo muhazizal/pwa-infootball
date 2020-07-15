@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 // Exports
 module.exports = {
@@ -188,10 +187,6 @@ module.exports = {
 					ios: 'startup',
 				},
 			],
-		}),
-		// Service worker webpack plugin
-		new ServiceWorkerWebpackPlugin({
-			entry: path.join(__dirname, '/src/sw.js'),
 		}),
 	],
 	devServer: {

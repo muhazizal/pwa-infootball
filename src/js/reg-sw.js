@@ -1,5 +1,3 @@
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-
 // Public key and private key
 const PUBLIC_KEY = 'BO4Wzzxp_ktERxJ87dIiQZ489unYQgcwggZuGs2Kmu4u_WUXTXiWz9XzY7uahsIdqXt_Bczg5tp2UswGjuDc5Ug';
 const PRIVATE_KEY = 'sDOLzJ9h3vO-NgMfl62pLwfkYG_vIMlMTP48bLTX4kA';
@@ -59,7 +57,6 @@ const requestPermission = () => {
 
 // Register service worker and push notification
 if ('serviceWorker' in navigator) {
-	const registration = runtime.register();
 	requestPermission();
 } else {
 	console.log('ServiceWorker belum didukung browser ini.');
