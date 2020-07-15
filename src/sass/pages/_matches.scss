@@ -1,0 +1,29 @@
+.matches__container {
+	margin-top: 85px;
+
+	.collection {
+		margin: 30px auto;
+		font-size: 14px;
+		font-weight: 500;
+		background-color: $light-background-1 !important;
+
+		&-header {
+			background-color: $dark-heading !important;
+			color: white;
+		}
+
+		&-item {
+			background-color: $light-background-1 !important;
+
+			#matchDate {
+				color: darkgrey;
+			}
+		}
+
+		h5 {
+			margin: 15px 0;
+			font-size: 20px;
+			font-weight: 500;
+		}
+	}
+}
