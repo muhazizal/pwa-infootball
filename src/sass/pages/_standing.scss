@@ -1,0 +1,19 @@
+.standing__container {
+	margin-top: 85px;
+}
+
+.table {
+	margin: 30px auto;
+
+	#competition-name &__header {
+		text-align: center;
+		background-color: $dark-heading;
+		color: white;
+		font-size: 20px;
+		font-weight: 500;
+	}
+
+	&__header {
+		background-color: $light-background-1;
+	}
+}
