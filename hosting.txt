@@ -1,2 +1,2 @@
 #Hosting Page
-https://pwa-infootball.web.app/
+https://pwa-infootball.web.app

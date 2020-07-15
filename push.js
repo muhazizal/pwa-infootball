@@ -1,8 +1,8 @@
 const webPush = require('web-push');
 
 // Public key and private key
-const PUBLIC_KEY = 'BO4Wzzxp_ktERxJ87dIiQZ489unYQgcwggZuGs2Kmu4u_WUXTXiWz9XzY7uahsIdqXt_Bczg5tp2UswGjuDc5Ug';
-const PRIVATE_KEY = 'sDOLzJ9h3vO-NgMfl62pLwfkYG_vIMlMTP48bLTX4kA';
+const PUBLIC_KEY = 'BBYCasg8puJp7mU50slAxRrFHvH4yX_tr5UpuVwgB9FpEok8cQHV-mxioJVKRcxBNidMbadv8ndL-mo-fPtII0g';
+const PRIVATE_KEY = 'KrAiodpcxQVt1cFUE8i81ztu6HB0_vsF2VzLjVu6Gpw';
 
 // Notifications payload setup
 const vapidKeys = {
@@ -14,10 +14,10 @@ webPush.setVapidDetails('mailto:example@yourdomain.org', vapidKeys.publicKey, va
 
 const pushSubscription = {
 	endpoint:
-		'https://fcm.googleapis.com/fcm/send/c3yWx41XP9k:APA91bFQJ3bD_vHmqgeB_gYr4T6nzlISBNE0jRgOibgSMD0aXAGy-4dnf4APKk_SVXhsAgy91a8gQMAEks01izbcpcuaR-Ymdt2adlks6NZQvQNkfWTSrS9ruWdI0XB_cX6YruRDwfTG',
+		'https://fcm.googleapis.com/fcm/send/cK_LVN7gPZQ:APA91bE0zRA_X9aF4l2zkuZcjEY1DrkRB4supf3rn3GRVhOJ4Srl7VJ-YNlyCi-ULKafhzx4KMtheBgg47v-BBf0DX-U7AML8Flsy4Fk5fZ_oNTZnw9O2dU5AUs0FQpkGq5qv1wUQfjV',
 	keys: {
-		p256dh: 'BKOWDJYjTts2NMO48tHtho1VyVjfzfRhvTTX06cFb9PIc+DcE24DErzMO/qGYS+c8kVyCNj7wUMQ2/HCTvMfICg=',
-		auth: 'lZCIt5QCdoK6S4H7xWphxg==',
+		p256dh: 'BHi2IvSPX1+ZOBTNo8IMvPwl6aLn3jsOp2r5Y2M5/DN5OnTkjW43PIyanz4NmHnxDxvl63NKc0/ksMrnLcOHrYg=',
+		auth: 'nyuyYkMUBJjVIx0BrqScYQ==',
 	},
 };
 

@@ -1,6 +1,6 @@
 // Public key and private key
-const PUBLIC_KEY = 'BO4Wzzxp_ktERxJ87dIiQZ489unYQgcwggZuGs2Kmu4u_WUXTXiWz9XzY7uahsIdqXt_Bczg5tp2UswGjuDc5Ug';
-const PRIVATE_KEY = 'sDOLzJ9h3vO-NgMfl62pLwfkYG_vIMlMTP48bLTX4kA';
+const PUBLIC_KEY = 'BBYCasg8puJp7mU50slAxRrFHvH4yX_tr5UpuVwgB9FpEok8cQHV-mxioJVKRcxBNidMbadv8ndL-mo-fPtII0g';
+const PRIVATE_KEY = 'KrAiodpcxQVt1cFUE8i81ztu6HB0_vsF2VzLjVu6Gpw';
 
 // Encode url base64
 const urlBase64ToUint8Array = base64String => {
@@ -62,6 +62,7 @@ if ('serviceWorker' in navigator) {
 			.register('../sw.js')
 			.then(registration => {
 				console.log('SW registered: ', registration);
+				return registration;
 			})
 			.catch(registrationError => {
 				console.log('SW registration failed: ', registrationError);
