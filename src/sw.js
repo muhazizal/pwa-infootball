@@ -1,4 +1,10 @@
-const DEBUG = false;
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js');
+
+workbox.core.skipWaiting();
+workbox.core.clientsClaim();
+
+// Register route
+workbox.routing.registerRoute(({ url }) => url.origin, new workbox.strategies.StaleWhileRevalidate());
 
 // Push notification
 self.addEventListener('push', event => {
@@ -23,3 +29,6 @@ self.addEventListener('push', event => {
 
 	event.waitUntil(self.registration.showNotification('Push Notification', options));
 });
+
+// Precaching file
+workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);

@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 // Exports
 module.exports = {
@@ -187,6 +188,10 @@ module.exports = {
 					ios: 'startup',
 				},
 			],
+		}),
+		new WorkboxWebpackPlugin.InjectManifest({
+			swSrc: './src/sw.js',
+			swDest: 'sw.js',
 		}),
 	],
 	devServer: {

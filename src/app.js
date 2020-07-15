@@ -3,7 +3,7 @@ import './sass/materialize.scss';
 import './js/materialize.min.js';
 
 // Import service-worker registration
-import './js/reg-sw.js';
+import './js/register-sw.js';
 
 // Import indexed db
 import './js/data/idb.js';
