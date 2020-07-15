@@ -168,7 +168,7 @@ module.exports = {
 				'apple-mobile-web-app-capable': 'yes',
 			},
 			crossorigin: 'anonymous',
-			start_url: '/index.html',
+			start_url: '/',
 			icons: [
 				{
 					src: path.resolve('./src/assets/icons/favicon.png'),
