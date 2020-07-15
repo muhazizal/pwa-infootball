@@ -6,6 +6,9 @@ import {
 	getFavoriteTeams,
 } from './data/api.js';
 
+import notFoundImg from '../assets/images/404-not-found.svg';
+import cannotAccessImg from '../assets/images/cannot-access.svg';
+
 const preloader = document.querySelector('.progress');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,9 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
 						brandLogo.setAttribute('href', url);
 					}
 				} else if (this.status === 404) {
-					content.innerHTML = '<p>Halaman tidak ditemukan.</p>';
+					content.innerHTML = `
+						<div class="card">
+							<div class="card-image waves-effect waves-block waves-light">
+								<img src="${notFoundImg}">
+							</div>
+						</div>
+					`;
 				} else {
-					content.innerHTML = '<p>Ups.. halaman tidak dapat diakses.</p>';
+					content.innerHTML = `
+						<div class="card">
+							<div class="card-image waves-effect waves-block waves-light">
+								<img src="${cannotAccessImg}">
+							</div>
+						</div>
+					`;
 				}
 			}
 		};

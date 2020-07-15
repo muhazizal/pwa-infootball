@@ -15,10 +15,11 @@ const fetchRequest = {
 	},
 };
 
-// Import league images
+// Import images
 import premierImg from '../../assets/images/premier.svg';
 import laligaImg from '../../assets/images/laliga.svg';
 import serieAImg from '../../assets/images/serieA.svg';
+import emptyData from '../../assets/images/empty-data.svg';
 
 // Preloader
 let preloader = document.querySelector('.progress');
@@ -300,31 +301,45 @@ const renderFavoriteTeams = teams => {
 	// Init element
 	let elementHtml = '';
 
-	// Loop for team card
-	teams.forEach(team => {
-		team.crestUrl = team.crestUrl.replace(/^http:\/\//i, 'https://');
-
-		elementHtml += `
-			<div class="col s12 m6 l4">
-				<div class="card">
-					<div class="card-image">
-						<img src="${team.crestUrl}">
-					</div>
-					<div class="card-content">
-						<p><span>Name:</span> ${team.name}</p>
-						<p><span>Venue:</span> ${team.venue}</p>
-						<p><span>Founded:</span> ${team.founded}</p>
-						
-					</div>
-					<div class="card-action center-align">
-						<button value="${team.id}" class="btn waves-effect waves-light removeFromFavorite">
-							Delete From Favorite
-						</button>
-					</div>
+	// Check if teams is empty
+	if (teams.length === 0) {
+		elementHtml = `
+			<div class="card" id="empty-card">
+				<div class="card-image waves-effect waves-block waves-light">
+					<img src="${emptyData}">
+				</div>
+				<div class="card-content center-align">
+					<p>You have not save any team.</p>
 				</div>
 			</div>
 		`;
-	});
+	} else {
+		// Loop for team card
+		teams.forEach(team => {
+			team.crestUrl = team.crestUrl.replace(/^http:\/\//i, 'https://');
+
+			elementHtml += `
+				<div class="col s12 m6 l4">
+					<div class="card">
+						<div class="card-image">
+							<img src="${team.crestUrl}">
+						</div>
+						<div class="card-content">
+							<p><span>Name:</span> ${team.name}</p>
+							<p><span>Venue:</span> ${team.venue}</p>
+							<p><span>Founded:</span> ${team.founded}</p>
+							
+						</div>
+						<div class="card-action center-align">
+							<button value="${team.id}" class="btn waves-effect waves-light removeFromFavorite">
+								Delete From Favorite
+							</button>
+						</div>
+					</div>
+				</div>
+			`;
+		});
+	}
 
 	document.querySelector('#favorite-team').innerHTML = elementHtml;
 
