@@ -1,4 +1,5 @@
-// Init idb
+// Init idb from idb.js
+// Using idb.js from dicoding version, not from node_modules
 const { default: idb } = require('./idb');
 
 // Create teams object store and index

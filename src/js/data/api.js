@@ -27,7 +27,7 @@ let preloader = document.querySelector('.progress');
 // Check response result
 const status = response => {
 	if (response.status !== 200) {
-		console.log('Error: ' + response.status);
+		console.log(`Error: ${response.status}`);
 		return Promise.reject(new Error(response.statusText));
 	} else {
 		return Promise.resolve(response);
@@ -41,7 +41,7 @@ const json = response => {
 
 // Show message on reject response
 const error = error => {
-	console.log('Error: ' + error);
+	console.log(`Error: ${error}`);
 };
 
 // Render competition
