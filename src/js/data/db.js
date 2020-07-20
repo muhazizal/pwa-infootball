@@ -27,11 +27,11 @@ export const saveTeam = team => {
 			preloader.style.display = 'none';
 			M.toast({
 				html: `${team.name} has been added to favorite`,
-				displayLength: 3000,
+				displayLength: 2000,
 			});
 		})
 		.catch(() => {
-			console.log('Failed to save');
+			preloader.style.display = 'none';
 		});
 };
 
@@ -53,7 +53,7 @@ export const deleteTeam = team => {
 			});
 		})
 		.catch(() => {
-			console.log('Failed to delete');
+			preloader.style.display = 'none';
 		});
 };
 

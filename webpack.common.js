@@ -151,6 +151,13 @@ module.exports = {
 			hash: true,
 			inject: false,
 		}),
+		new HtmlWebpackPlugin({
+			filename: 'html/pages/offline.html',
+			template: './src/html/pages/offline.html',
+			minify: true,
+			hash: true,
+			inject: false,
+		}),
 		// Pwa manifest plugin
 		new WebpackPwaManifest({
 			name: 'PWA Infootball',

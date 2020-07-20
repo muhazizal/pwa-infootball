@@ -20,6 +20,7 @@ import premierImg from '../../assets/images/premier.svg';
 import laligaImg from '../../assets/images/laliga.svg';
 import serieAImg from '../../assets/images/serieA.svg';
 import emptyData from '../../assets/images/empty-data.svg';
+import notFound from '../../assets/images/404-not-found.svg';
 
 // Preloader
 let preloader = document.querySelector('.progress');
@@ -57,7 +58,7 @@ const renderCompetition = data => {
 				<a class="competition" href="${url}/competition.html?id=${competition.id}">
 					<div class="card">
 						<div class="card-image waves-effect waves-block waves-light">
-							<img src="${premierImg}">
+							<img src="${premierImg}" onerror="this.src='${notFound}'">
 						</div>
 						<div class="card-content">
 							<p>${competition.name}</p>
@@ -72,7 +73,7 @@ const renderCompetition = data => {
 				<a class="competition" href="${url}/competition.html?id=${competition.id}">
 					<div class="card">
 						<div class="card-image waves-effect waves-block waves-light">
-							<img src="${serieAImg}">
+							<img src="${serieAImg}" onerror="this.src='${notFound}'">
 						</div>
 						<div class="card-content">
 							<p>${competition.name}</p>
@@ -87,7 +88,7 @@ const renderCompetition = data => {
 				<a class="competition" href="${url}/competition.html?id=${competition.id}">
 					<div class="card">
 						<div class="card-image waves-effect waves-block waves-light">
-							<img src="${laligaImg}">
+							<img src="${laligaImg}" onerror="this.src='${notFound}'">
 						</div>
 						<div class="card-content">
 							<p>${competition.name}</p>
@@ -206,7 +207,7 @@ const renderCompetitionTeams = data => {
 			<div class="col s12 m6 l4">
 				<div class="card">
 					<div class="card-image">
-						<img src="${team.crestUrl}">
+						<img src="${team.crestUrl}" onerror="this.src='${notFound}'">
 						<button value="${team.id}" class="btn-floating halfway-fab waves-effect waves-light addToFavorite">
 							<i class="material-icons">favorite_border</i>
 						</button>
@@ -257,6 +258,9 @@ const renderCompetitionTeams = data => {
 								.then(() => {
 									favoriteMdi.innerHTML = 'favorite';
 									favoriteMdi.style.color = 'red';
+								})
+								.catch(() => {
+									preloader.style.display = 'none';
 								});
 						}
 					});
@@ -271,6 +275,9 @@ const renderCompetitionTeams = data => {
 					.then(() => {
 						favoriteMdi.innerHTML = 'favorite';
 						favoriteMdi.style.color = 'red';
+					})
+					.catch(() => {
+						preloader.style.display = 'none';
 					});
 			}
 
@@ -287,6 +294,9 @@ const renderCompetitionTeams = data => {
 								.then(() => {
 									favoriteMdi.innerHTML = 'favorite_border';
 									favoriteMdi.style.color = 'black';
+								})
+								.catch(() => {
+									preloader.style.display = 'none';
 								});
 						}
 					});
@@ -306,7 +316,7 @@ const renderFavoriteTeams = teams => {
 		elementHtml = `
 			<div class="card" id="empty-card">
 				<div class="card-image waves-effect waves-block waves-light">
-					<img src="${emptyData}">
+					<img src="${emptyData}" onerror="this.src='${notFound}'">
 				</div>
 				<div class="card-content center-align">
 					<p>You have not save any team.</p>
@@ -322,7 +332,7 @@ const renderFavoriteTeams = teams => {
 				<div class="col s12 m6 l4">
 					<div class="card">
 						<div class="card-image">
-							<img src="${team.crestUrl}">
+							<img src="${team.crestUrl}" onerror="this.src='${notFound}'">
 						</div>
 						<div class="card-content">
 							<p><span>Name:</span> ${team.name}</p>
@@ -366,6 +376,9 @@ const renderFavoriteTeams = teams => {
 							.then(() => {
 								// Render new card
 								getFavoriteTeams();
+							})
+							.catch(() => {
+								preloader.style.display = 'none';
 							});
 					}
 				});

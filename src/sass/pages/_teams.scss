@@ -65,3 +65,22 @@
 		}
 	}
 }
+
+#offline {
+	margin-top: 0;
+
+	#empty-card {
+		height: 250px;
+		width: 250px;
+	}
+
+	&-div {
+		.card {
+			height: 400px;
+
+			&-action {
+				padding: 25px;
+			}
+		}
+	}
+}

@@ -26,7 +26,7 @@ const requestPermission = () => {
 				return;
 			}
 
-			navigator.serviceWorker.getRegistration().then(reg => {
+			navigator.serviceWorker.ready.then(() => {
 				if ('PushManager' in window) {
 					navigator.serviceWorker.getRegistration().then(registration => {
 						registration.pushManager
