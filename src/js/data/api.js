@@ -45,57 +45,40 @@ const error = error => {
 	console.log(`Error: ${error}`);
 };
 
-// Render competition
-const renderCompetition = data => {
+// Single card carousel competition element
+const competitionElement = (selector, img, competition) => {
 	// Url
 	const url = window.location.origin;
 
+	document.querySelector(selector).innerHTML = `
+		<a class="competition" href="${url}/competition.html?id=${competition.id}">
+			<div class="card">
+				<div class="card-image waves-effect waves-block waves-light">
+					<img src="${img}" onerror="this.src='${notFound}'">
+				</div>
+				<div class="card-content">
+					<p>${competition.name}</p>
+				</div>
+			</div>
+		</a>
+	`;
+};
+
+// Render competition card carousel
+const renderCompetition = data => {
 	// Print element
 	data.competitions.forEach(competition => {
 		// If premier league
 		if (competition.id === 2021) {
-			document.querySelector('#english').innerHTML = `
-				<a class="competition" href="${url}/competition.html?id=${competition.id}">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img src="${premierImg}" onerror="this.src='${notFound}'">
-						</div>
-						<div class="card-content">
-							<p>${competition.name}</p>
-						</div>
-					</div>
-				</a>
-			`;
+			competitionElement('#english', premierImg, competition);
 		}
 		// If serie A
 		if (competition.id === 2019) {
-			document.querySelector('#serieA').innerHTML = `
-				<a class="competition" href="${url}/competition.html?id=${competition.id}">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img src="${serieAImg}" onerror="this.src='${notFound}'">
-						</div>
-						<div class="card-content">
-							<p>${competition.name}</p>
-						</div>
-					</div>
-				</a>
-			`;
+			competitionElement('#serieA', serieAImg, competition);
 		}
 		// If la liga
 		if (competition.id === 2014) {
-			document.querySelector('#spain').innerHTML = `
-				<a class="competition" href="${url}/competition.html?id=${competition.id}">
-					<div class="card">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img src="${laligaImg}" onerror="this.src='${notFound}'">
-						</div>
-						<div class="card-content">
-							<p>${competition.name}</p>
-						</div>
-					</div>
-				</a>
-			`;
+			competitionElement('#spain', laligaImg, competition);
 		}
 	});
 };
@@ -253,6 +236,22 @@ const renderCompetitionTeams = data => {
 							response
 								.json()
 								.then(data => {
+									console.log('caches');
+									saveTeam(data);
+								})
+								.then(() => {
+									favoriteMdi.innerHTML = 'favorite';
+									favoriteMdi.style.color = 'red';
+								})
+								.catch(() => {
+									preloader.style.display = 'none';
+								});
+						} else {
+							fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
+								.then(status)
+								.then(json)
+								.then(data => {
+									console.log('fetch');
 									saveTeam(data);
 								})
 								.then(() => {
@@ -265,20 +264,6 @@ const renderCompetitionTeams = data => {
 						}
 					});
 				}
-
-				fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
-					.then(status)
-					.then(json)
-					.then(data => {
-						saveTeam(data);
-					})
-					.then(() => {
-						favoriteMdi.innerHTML = 'favorite';
-						favoriteMdi.style.color = 'red';
-					})
-					.catch(() => {
-						preloader.style.display = 'none';
-					});
 			}
 
 			// If saved, then delete
@@ -289,6 +274,21 @@ const renderCompetitionTeams = data => {
 							response
 								.json()
 								.then(data => {
+									deleteTeam(data);
+								})
+								.then(() => {
+									favoriteMdi.innerHTML = 'favorite_border';
+									favoriteMdi.style.color = 'black';
+								})
+								.catch(() => {
+									preloader.style.display = 'none';
+								});
+						} else {
+							fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
+								.then(status)
+								.then(json)
+								.then(data => {
+									console.log('fetch');
 									deleteTeam(data);
 								})
 								.then(() => {
@@ -380,6 +380,28 @@ const renderFavoriteTeams = teams => {
 							.catch(() => {
 								preloader.style.display = 'none';
 							});
+					} else {
+						fetch(`${BASE_URL}v2/teams/${btn.value}`)
+							.then(status)
+							.then(json)
+							.then(data => {
+								console.log('fetch');
+								deleteTeam(data);
+							})
+							.then(() => {
+								// Delete old card
+								let favoriteTeamContainer = document.querySelectorAll('.col');
+								favoriteTeamContainer.forEach(card => {
+									card.parentNode.removeChild(card);
+								});
+							})
+							.then(() => {
+								// Render new card
+								getFavoriteTeams();
+							})
+							.catch(() => {
+								preloader.style.display = 'none';
+							});
 					}
 				});
 			}
@@ -389,94 +411,86 @@ const renderFavoriteTeams = teams => {
 
 // Get one particular competition
 export const getCompetition = () => {
-	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions?plan=TIER_ONE`).then(response => {
 			if (response) {
 				response.json().then(data => {
 					renderCompetition(data);
 				});
+			} else {
+				fetch(`${BASE_URL}v2/competitions?plan=TIER_ONE`, fetchRequest)
+					.then(status)
+					.then(json)
+					.then(data => {
+						renderCompetition(data);
+					})
+					.catch(error);
 			}
 		});
 	}
-
-	// Fetch competition
-	fetch(`${BASE_URL}v2/competitions?plan=TIER_ONE`, fetchRequest)
-		.then(status)
-		.then(json)
-		.then(data => {
-			renderCompetition(data);
-		})
-		.catch(error);
 };
 
 // Get competition matches
 export const getCompetitionMatches = () => {
-	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`).then(response => {
 			if (response) {
 				response.json().then(data => {
 					renderCompetitionMatches(data);
 				});
+			} else {
+				fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`, fetchRequest)
+					.then(status)
+					.then(json)
+					.then(data => {
+						renderCompetitionMatches(data);
+					})
+					.catch(error);
 			}
 		});
 	}
-
-	// Fetch competition matches
-	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`, fetchRequest)
-		.then(status)
-		.then(json)
-		.then(data => {
-			renderCompetitionMatches(data);
-		})
-		.catch(error);
 };
 
 // Get competition standing
 export const getCompetitionStanding = () => {
-	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`).then(response => {
 			if (response) {
 				response.json().then(data => {
 					renderCompetitionStanding(data);
 				});
+			} else {
+				fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`, fetchRequest)
+					.then(status)
+					.then(json)
+					.then(data => {
+						renderCompetitionStanding(data);
+					})
+					.catch(error);
 			}
 		});
 	}
-
-	// Render competition standings
-	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`, fetchRequest)
-		.then(status)
-		.then(json)
-		.then(data => {
-			renderCompetitionStanding(data);
-		})
-		.catch(error);
 };
 
 // Get competition teams
 export const getCompetitionTeams = () => {
-	// If cached
 	if ('caches' in window) {
 		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`).then(response => {
 			if (response) {
 				response.json().then(data => {
 					renderCompetitionTeams(data);
 				});
+			} else {
+				fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`, fetchRequest)
+					.then(status)
+					.then(json)
+					.then(data => {
+						renderCompetitionTeams(data);
+					})
+					.catch(message => error(message));
 			}
 		});
 	}
-
-	// Fetch competition teams
-	fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`, fetchRequest)
-		.then(status)
-		.then(json)
-		.then(data => {
-			renderCompetitionTeams(data);
-		})
-		.catch(message => error(message));
 };
 
 // Get favorite teams

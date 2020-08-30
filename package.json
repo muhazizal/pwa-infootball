@@ -4,8 +4,8 @@
 	"description": "pwa football theme",
 	"main": "app.js",
 	"scripts": {
-		"build": "webpack --config webpack.prod.js",
-		"serve": "webpack-dev-server --config webpack.dev.js --open"
+		"dev": "webpack-dev-server --config webpack.dev.js --open",
+		"build": "webpack --config webpack.prod.js"
 	},
 	"repository": {
 		"type": "git",
