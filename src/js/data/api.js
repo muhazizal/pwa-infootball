@@ -26,7 +26,7 @@ import notFound from '../../assets/images/404-not-found.svg';
 let preloader = document.querySelector('.progress');
 
 // Check response result
-const status = response => {
+const status = (response) => {
 	if (response.status !== 200) {
 		console.log(`Error: ${response.status}`);
 		return Promise.reject(new Error(response.statusText));
@@ -36,12 +36,12 @@ const status = response => {
 };
 
 // Turn data response into json
-const json = response => {
+const json = (response) => {
 	return response.json();
 };
 
 // Show message on reject response
-const error = error => {
+const error = (error) => {
 	console.log(`Error: ${error}`);
 };
 
@@ -65,9 +65,9 @@ const competitionElement = (selector, img, competition) => {
 };
 
 // Render competition card carousel
-const renderCompetition = data => {
+const renderCompetition = (data) => {
 	// Print element
-	data.competitions.forEach(competition => {
+	data.competitions.forEach((competition) => {
 		// If premier league
 		if (competition.id === 2021) {
 			competitionElement('#english', premierImg, competition);
@@ -84,13 +84,13 @@ const renderCompetition = data => {
 };
 
 // Render competition matches
-const renderCompetitionMatches = data => {
+const renderCompetitionMatches = (data) => {
 	let elementHtml = '';
 	const matchLength = data.matches.length;
 	const competitionName = `<li class="collection-header center-align"><h5>${data.competition.name}</h5></li>`;
 
 	// Loop data and print element
-	data.matches.forEach(match => {
+	data.matches.forEach((match) => {
 		let matchDate = match.utcDate.substr(0, 10) + ' | ' + match.utcDate.substr(11, 18);
 
 		// If match array 0
@@ -133,7 +133,7 @@ const renderCompetitionMatches = data => {
 };
 
 // Render competition standing
-const renderCompetitionStanding = data => {
+const renderCompetitionStanding = (data) => {
 	// Init element
 	let elementHtml = '';
 	const competitionName = `<th class="table__header" colspan="10">${data.competition.name}</th>`;
@@ -151,7 +151,7 @@ const renderCompetitionStanding = data => {
 	`;
 
 	// Looping total (away + home) matches
-	data.standings[0].table.forEach(standing => {
+	data.standings[0].table.forEach((standing) => {
 		elementHtml += `
 			<tr class="table__row">
 				<td class="table__data">${standing.position}</td>
@@ -174,7 +174,7 @@ const renderCompetitionStanding = data => {
 };
 
 // Render competition teams
-const renderCompetitionTeams = data => {
+const renderCompetitionTeams = (data) => {
 	// Set header competition
 	document.querySelector('.teams__header').innerHTML = data.competition.name;
 
@@ -183,7 +183,7 @@ const renderCompetitionTeams = data => {
 	let elementHtml = '';
 
 	// Loop for team card
-	teams.forEach(team => {
+	teams.forEach((team) => {
 		team.crestUrl = team.crestUrl.replace(/^http:\/\//i, 'https://');
 
 		elementHtml += `
@@ -196,9 +196,9 @@ const renderCompetitionTeams = data => {
 						</button>
 					</div>
 					<div class="card-content">
-						<p><span>Name:</span> ${team.name}</p>
-						<p><span>Venue:</span> ${team.venue}</p>
-						<p><span>Founded:</span> ${team.founded}</p>
+						<p>${team.name}</p>
+						<p>${team.venue}</p>
+						<p>${team.founded}</p>
 					</div>
 				</div>
 			</div>
@@ -208,14 +208,14 @@ const renderCompetitionTeams = data => {
 	});
 
 	// Loop all button save
-	document.querySelectorAll('.addToFavorite').forEach(btnSave => {
+	document.querySelectorAll('.addToFavorite').forEach((btnSave) => {
 		// Init teamId and mdi-element
 		const teamId = parseInt(btnSave.value);
 		const favoriteMdi = btnSave.childNodes[1];
 
 		// Check favorite teams
-		getSavedTeams().then(savedTeams => {
-			savedTeams.forEach(savedTeam => {
+		getSavedTeams().then((savedTeams) => {
+			savedTeams.forEach((savedTeam) => {
 				// If match, turn favorite to red
 				if (savedTeam.id === teamId) {
 					favoriteMdi.innerHTML = 'favorite';
@@ -231,11 +231,11 @@ const renderCompetitionTeams = data => {
 			// If not saved, then save
 			if (favoriteMdi.innerHTML === 'favorite_border') {
 				if ('caches' in window) {
-					global.caches.match(`${BASE_URL}v2/teams/${teamId}`, fetchRequest).then(response => {
+					global.caches.match(`${BASE_URL}v2/teams/${teamId}`, fetchRequest).then((response) => {
 						if (response) {
 							response
 								.json()
-								.then(data => {
+								.then((data) => {
 									console.log('caches');
 									saveTeam(data);
 								})
@@ -250,7 +250,7 @@ const renderCompetitionTeams = data => {
 							fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
 								.then(status)
 								.then(json)
-								.then(data => {
+								.then((data) => {
 									console.log('fetch');
 									saveTeam(data);
 								})
@@ -269,11 +269,11 @@ const renderCompetitionTeams = data => {
 			// If saved, then delete
 			if (favoriteMdi.innerHTML === 'favorite') {
 				if ('caches' in window) {
-					global.caches.match(`${BASE_URL}v2/teams/${teamId}`, fetchRequest).then(response => {
+					global.caches.match(`${BASE_URL}v2/teams/${teamId}`, fetchRequest).then((response) => {
 						if (response) {
 							response
 								.json()
-								.then(data => {
+								.then((data) => {
 									deleteTeam(data);
 								})
 								.then(() => {
@@ -287,7 +287,7 @@ const renderCompetitionTeams = data => {
 							fetch(`${BASE_URL}v2/teams/${teamId}`, fetchRequest)
 								.then(status)
 								.then(json)
-								.then(data => {
+								.then((data) => {
 									console.log('fetch');
 									deleteTeam(data);
 								})
@@ -307,7 +307,7 @@ const renderCompetitionTeams = data => {
 };
 
 // Render favorite teams
-const renderFavoriteTeams = teams => {
+const renderFavoriteTeams = (teams) => {
 	// Init element
 	let elementHtml = '';
 
@@ -325,7 +325,7 @@ const renderFavoriteTeams = teams => {
 		`;
 	} else {
 		// Loop for team card
-		teams.forEach(team => {
+		teams.forEach((team) => {
 			team.crestUrl = team.crestUrl.replace(/^http:\/\//i, 'https://');
 
 			elementHtml += `
@@ -354,22 +354,22 @@ const renderFavoriteTeams = teams => {
 	document.querySelector('#favorite-team').innerHTML = elementHtml;
 
 	// Add event listener delete team for each button
-	document.querySelectorAll('.removeFromFavorite').forEach(btn => {
+	document.querySelectorAll('.removeFromFavorite').forEach((btn) => {
 		btn.addEventListener('click', () => {
 			preloader.style.display = 'block';
 
 			if ('caches' in window) {
-				global.caches.match(`${BASE_URL}v2/teams/${btn.value}`).then(response => {
+				global.caches.match(`${BASE_URL}v2/teams/${btn.value}`).then((response) => {
 					if (response) {
 						response
 							.json()
-							.then(data => {
+							.then((data) => {
 								deleteTeam(data);
 							})
 							.then(() => {
 								// Delete old card
 								let favoriteTeamContainer = document.querySelectorAll('.col');
-								favoriteTeamContainer.forEach(card => {
+								favoriteTeamContainer.forEach((card) => {
 									card.parentNode.removeChild(card);
 								});
 							})
@@ -384,14 +384,14 @@ const renderFavoriteTeams = teams => {
 						fetch(`${BASE_URL}v2/teams/${btn.value}`)
 							.then(status)
 							.then(json)
-							.then(data => {
+							.then((data) => {
 								console.log('fetch');
 								deleteTeam(data);
 							})
 							.then(() => {
 								// Delete old card
 								let favoriteTeamContainer = document.querySelectorAll('.col');
-								favoriteTeamContainer.forEach(card => {
+								favoriteTeamContainer.forEach((card) => {
 									card.parentNode.removeChild(card);
 								});
 							})
@@ -412,16 +412,16 @@ const renderFavoriteTeams = teams => {
 // Get one particular competition
 export const getCompetition = () => {
 	if ('caches' in window) {
-		global.caches.match(`${BASE_URL}v2/competitions?plan=TIER_ONE`).then(response => {
+		global.caches.match(`${BASE_URL}v2/competitions?plan=TIER_ONE`).then((response) => {
 			if (response) {
-				response.json().then(data => {
+				response.json().then((data) => {
 					renderCompetition(data);
 				});
 			} else {
 				fetch(`${BASE_URL}v2/competitions?plan=TIER_ONE`, fetchRequest)
 					.then(status)
 					.then(json)
-					.then(data => {
+					.then((data) => {
 						renderCompetition(data);
 					})
 					.catch(error);
@@ -433,16 +433,16 @@ export const getCompetition = () => {
 // Get competition matches
 export const getCompetitionMatches = () => {
 	if ('caches' in window) {
-		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`).then(response => {
+		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`).then((response) => {
 			if (response) {
-				response.json().then(data => {
+				response.json().then((data) => {
 					renderCompetitionMatches(data);
 				});
 			} else {
 				fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/matches?status=SCHEDULED`, fetchRequest)
 					.then(status)
 					.then(json)
-					.then(data => {
+					.then((data) => {
 						renderCompetitionMatches(data);
 					})
 					.catch(error);
@@ -454,16 +454,16 @@ export const getCompetitionMatches = () => {
 // Get competition standing
 export const getCompetitionStanding = () => {
 	if ('caches' in window) {
-		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`).then(response => {
+		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`).then((response) => {
 			if (response) {
-				response.json().then(data => {
+				response.json().then((data) => {
 					renderCompetitionStanding(data);
 				});
 			} else {
 				fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/standings`, fetchRequest)
 					.then(status)
 					.then(json)
-					.then(data => {
+					.then((data) => {
 						renderCompetitionStanding(data);
 					})
 					.catch(error);
@@ -475,19 +475,19 @@ export const getCompetitionStanding = () => {
 // Get competition teams
 export const getCompetitionTeams = () => {
 	if ('caches' in window) {
-		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`).then(response => {
+		global.caches.match(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`).then((response) => {
 			if (response) {
-				response.json().then(data => {
+				response.json().then((data) => {
 					renderCompetitionTeams(data);
 				});
 			} else {
 				fetch(`${BASE_URL}v2/competitions/${COMPETITION_ID}/teams`, fetchRequest)
 					.then(status)
 					.then(json)
-					.then(data => {
+					.then((data) => {
 						renderCompetitionTeams(data);
 					})
-					.catch(message => error(message));
+					.catch((message) => error(message));
 			}
 		});
 	}
@@ -495,7 +495,7 @@ export const getCompetitionTeams = () => {
 
 // Get favorite teams
 export const getFavoriteTeams = () => {
-	getSavedTeams().then(teams => {
+	getSavedTeams().then((teams) => {
 		renderFavoriteTeams(teams);
 	});
 };
