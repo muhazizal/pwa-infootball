@@ -1,86 +1,86 @@
 .teams__container {
-	margin-top: 100px;
+  margin-top: 100px;
 
-	h5 {
-		margin: 38px auto 0 auto;
-		text-align: center;
-		color: $dark-heading;
-		font-size: 22px;
-		font-weight: 500;
-	}
+  h5 {
+    margin: 38px auto 0 auto;
+    text-align: center;
+    color: $dark-heading;
+    font-size: 22px;
+    font-weight: 500;
+  }
 
-	.card {
-		margin: 30px auto;
-		padding-top: 24px;
+  .card {
+    margin: 30px auto;
+    padding-top: 24px;
 
-		&-image {
-			img {
-				max-width: 200px;
-				max-height: 200px;
-				margin: 0 auto;
-			}
+    &-image {
+      img {
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+      }
 
-			i {
-				background-color: white;
-				color: black;
-			}
-		}
+      i {
+        background-color: white;
+        color: black;
+      }
+    }
 
-		p {
-			color: $dark-background-1;
+    p {
+      color: $dark-background-1;
 
-			span {
-				color: darkgrey;
-			}
-		}
-	}
+      span {
+        color: darkgrey;
+      }
+    }
+  }
 }
 
 #favorite {
-	margin-top: 0;
+  margin-top: 0;
 
-	&-header {
-		font-size: 28px;
-		font-weight: 500;
-		margin: 39px auto;
-		color: black;
-	}
+  &-header {
+    font-size: 28px;
+    font-weight: 500;
+    margin: 39px auto;
+    color: black;
+  }
 
-	#empty-card {
-		height: 250px;
-		width: 250px;
-	}
+  #empty-card {
+    height: 280px;
+    width: 250px;
+  }
 
-	&-team {
-		.card {
-			height: 400px;
+  &-team {
+    .card {
+      height: 400px;
 
-			&-action {
-				padding: 25px;
-			}
-		}
+      &-action {
+        padding: 25px;
+      }
+    }
 
-		.removeFromFavorite {
-			background-color: crimson;
-		}
-	}
+    .removeFromFavorite {
+      background-color: crimson;
+    }
+  }
 }
 
 #offline {
-	margin-top: 0;
+  margin-top: 0;
 
-	#empty-card {
-		height: 250px;
-		width: 250px;
-	}
+  #empty-card {
+    height: 250px;
+    width: 250px;
+  }
 
-	&-div {
-		.card {
-			height: 400px;
+  &-div {
+    .card {
+      height: 400px;
 
-			&-action {
-				padding: 25px;
-			}
-		}
-	}
+      &-action {
+        padding: 25px;
+      }
+    }
+  }
 }
