@@ -114,6 +114,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add event listener on list menu
         document.querySelectorAll(".sidenav a, .topnav a").forEach((el) => {
           el.addEventListener("click", (event) => {
+            // Remove link-active on click
+            document.querySelectorAll(".sidenav a, .topnav a").forEach((btn) => {
+              btn.classList.remove("link-active");
+            });
+
+            el.classList.add("link-active");
+
             // Close sidenav
             const sidenav = document.querySelector(".sidenav");
             M.Sidenav.getInstance(sidenav).close();

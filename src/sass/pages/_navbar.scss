@@ -1,40 +1,46 @@
 nav {
-	background-color: $light-background-1;
+  background-color: $light-background-1;
 
-	.brand-logo,
-	.sidenav-trigger {
-		color: $dark-heading;
-		font-weight: 600;
-	}
+  .brand-logo,
+  .sidenav-trigger {
+    color: $dark-heading;
+    font-weight: 600;
+  }
 
-	li {
-		a {
-			color: black;
-			padding: 0 25px;
+  li {
+    a {
+      color: black;
+      padding: 0 25px;
+      font-weight: 500;
 
-			i {
-				color: $dark-heading !important;
-			}
-		}
-	}
+      i {
+        color: $dark-heading !important;
+      }
+    }
+
+    a.link-active {
+      color: $dark-heading !important;
+    }
+  }
 }
 
 .sidenav {
-	background-color: $light-background-1;
+  background-color: $light-background-1;
 
-	li {
-		a {
-			color: black;
-			padding: 0 25px;
+  li {
+    a {
+      color: black;
+      padding: 0 25px;
+      font-weight: 500;
 
-			i {
-				color: $dark-heading !important;
-			}
-		}
-	}
+      i {
+        color: $dark-heading !important;
+      }
+    }
+  }
 }
 
 .sidenav li > a:hover,
 nav ul a:hover {
-	background-color: rgba($color: $light-heading, $alpha: 0.1);
+  background-color: rgba($color: $light-heading, $alpha: 0.1);
 }
