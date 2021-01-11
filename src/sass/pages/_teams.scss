@@ -12,12 +12,17 @@
   .card {
     margin: 30px auto;
     padding-top: 24px;
+    transition: all 0.25s ease-in-out;
 
     &-image {
       img {
         max-width: 200px;
         max-height: 200px;
         margin: 0 auto;
+      }
+
+      button:hover {
+        box-shadow: 0px 0px 10px 1px rgba(0, 58, 102, 0.5);
       }
 
       i {
@@ -33,6 +38,10 @@
         color: darkgrey;
       }
     }
+
+    &:hover {
+      box-shadow: 0px 0px 10px 1px rgba(0, 58, 102, 0.75);
+    }
   }
 }
 
@@ -42,8 +51,8 @@
   &-header {
     font-size: 28px;
     font-weight: 500;
-    margin: 39px auto;
-    color: black;
+    margin: 39px auto 0 auto;
+    color: $dark-heading;
   }
 
   #empty-card {
@@ -53,7 +62,7 @@
 
   &-team {
     .card {
-      height: 400px;
+      min-height: 400px;
 
       &-action {
         padding: 25px;
