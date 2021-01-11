@@ -19,6 +19,10 @@ const fetchRequest = {
 import premierImg from "../../assets/images/premier.svg";
 import laligaImg from "../../assets/images/laliga.svg";
 import serieAImg from "../../assets/images/serieA.svg";
+import ligue1Img from "../../assets/images/ligue1.svg";
+import bundesligaImg from "../../assets/images/bundesliga.svg";
+import eredivisieImg from "../../assets/images/eredivisie.svg";
+import primeiraImg from "../../assets/images/primeira.svg";
 import emptyData from "../../assets/images/empty-data.svg";
 import notFound from "../../assets/images/404-not-found.svg";
 
@@ -66,19 +70,30 @@ const competitionElement = (selector, img, competition) => {
 
 // Render competition card carousel
 const renderCompetition = (data) => {
+  console.log(data);
+
   // Print element
   data.competitions.forEach((competition) => {
-    // If premier league
     if (competition.id === 2021) {
       competitionElement("#english", premierImg, competition);
     }
-    // If serie A
     if (competition.id === 2019) {
       competitionElement("#serieA", serieAImg, competition);
     }
-    // If la liga
     if (competition.id === 2014) {
       competitionElement("#spain", laligaImg, competition);
+    }
+    if (competition.id === 2015) {
+      competitionElement("#ligue1", ligue1Img, competition);
+    }
+    if (competition.id === 2002) {
+      competitionElement("#bundesliga", bundesligaImg, competition);
+    }
+    if (competition.id === 2003) {
+      competitionElement("#eredivisie", eredivisieImg, competition);
+    }
+    if (competition.id === 2017) {
+      competitionElement("#primeira", primeiraImg, competition);
     }
   });
 };
