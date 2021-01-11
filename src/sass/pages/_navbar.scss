@@ -37,6 +37,10 @@ nav {
         color: $dark-heading !important;
       }
     }
+
+    a.link-active {
+      color: $dark-heading !important;
+    }
   }
 }
 

@@ -17,8 +17,8 @@ const fetchRequest = {
 
 // Import images
 import premierImg from "../../assets/images/premier.svg";
-import laligaImg from "../../assets/images/laliga.svg";
 import serieAImg from "../../assets/images/serieA.svg";
+import laligaImg from "../../assets/images/laliga.svg";
 import ligue1Img from "../../assets/images/ligue1.svg";
 import bundesligaImg from "../../assets/images/bundesliga.svg";
 import eredivisieImg from "../../assets/images/eredivisie.svg";
@@ -104,9 +104,11 @@ const renderCompetitionMatches = (data) => {
   const matchLength = data.matches.length;
   const competitionName = `<li class="collection-header center-align"><h5>${data.competition.name}</h5></li>`;
 
+  console.log(data);
+
   // Loop data and print element
   data.matches.forEach((match) => {
-    let matchDate = match.utcDate.substr(0, 10) + " | " + match.utcDate.substr(11, 18);
+    let matchDate = match.utcDate.substr(0, 10) + " | " + match.utcDate.substr(11, 14);
 
     // If match array 0
     if (matchLength === 0) {
@@ -120,12 +122,14 @@ const renderCompetitionMatches = (data) => {
     else if (matchLength === 1) {
       elementHtml += `
 				<li class="collection-item col s12">
-					<div class="center-align block">
-						<p>${match.awayTeam.name}</p>
-						<p>VS</p>
-						<p>${match.homeTeam.name}</p>
-						<p id="matchDate">${matchDate}</p>
-					</div>
+          <div class="center-align block">
+            <p>${match.awayTeam.name}</p>
+            <img src="https://crests.football-data.org/${match.awayTeam.id}.svg" class="match-images">
+            <p>VS</p>
+            <img src="https://crests.football-data.org/${match.homeTeam.id}.svg" class="match-images">
+            <p>${match.homeTeam.name}</p>
+            <p id="matchDate">${matchDate}</p>
+          </div>
 				</li>
 			`;
     }
@@ -133,12 +137,14 @@ const renderCompetitionMatches = (data) => {
     else {
       elementHtml += `
 				<li class="collection-item col s12 m6 l4">
-					<div class="center-align block">
-						<p>${match.awayTeam.name}</p>
-						<p>VS</p>
-						<p>${match.homeTeam.name}</p>
-						<p id="matchDate">${matchDate}</p>
-					</div>
+          <div class="center-align block">
+            <p>${match.awayTeam.name}</p>
+            <img src="https://crests.football-data.org/${match.awayTeam.id}.svg" class="match-images">
+            <p>VS</p>
+            <img src="https://crests.football-data.org/${match.homeTeam.id}.svg" class="match-images">
+            <p>${match.homeTeam.name}</p>
+            <p id="matchDate">${matchDate}</p>
+          </div>
 				</li>
 			`;
     }
