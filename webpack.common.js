@@ -1,11 +1,11 @@
 // Init
-const isDevelopment = process.env.NODE_ENV === 'development';
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const isDevelopment = process.env.NODE_ENV === 'development'
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 
 // Exports
 module.exports = {
@@ -46,9 +46,10 @@ module.exports = {
 					{
 						loader: 'sass-loader',
 						options: {
-							implementation: require('node-sass'),
+							// Prefer `dart-sass`
+							implementation: require('sass'),
 							sassOptions: {
-								fiber: false,
+								fiber: require('fibers'),
 							},
 						},
 					},
@@ -59,7 +60,9 @@ module.exports = {
 				test: /\.(png|jpe?g|gif|svg)$/i,
 				loader: 'file-loader',
 				options: {
-					name: isDevelopment ? '[path][name].[ext]' : '[name].[contenthash].[ext]',
+					name: isDevelopment
+						? '[path][name].[ext]'
+						: '[name].[contenthash].[ext]',
 					outputPath: path.join('assets', 'images'),
 					limit: 10000,
 				},
@@ -207,4 +210,4 @@ module.exports = {
 		writeToDisk: true,
 	},
 	devtool: 'inline-source-map',
-};
+}
