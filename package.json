@@ -46,7 +46,7 @@
 		"webpack-dev-server": "^3.11.3",
 		"webpack-material-design-icons": "^0.1.0",
 		"webpack-merge": "^4.2.2",
-		"webpack-pwa-manifest": "^4.2.0",
+		"webpack-pwa-manifest": "^4.3.0",
 		"workbox-webpack-plugin": "^5.1.3"
 	}
 }
