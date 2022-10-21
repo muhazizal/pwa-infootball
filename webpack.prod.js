@@ -1,8 +1,8 @@
 // Init
-const merge = require('webpack-merge');
-const common = require('./webpack.common');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const { merge } = require('webpack-merge')
+const common = require('./webpack.common')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 // Export
 module.exports = merge(common, {
@@ -72,4 +72,4 @@ module.exports = merge(common, {
 			new OptimizeCSSAssetsPlugin({}),
 		],
 	},
-});
+})
